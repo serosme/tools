@@ -1,8 +1,11 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 
 let mainWindow: BrowserWindow
+
+// 移除默认菜单栏
+Menu.setApplicationMenu(null)
 
 export function createMainWindow() {
   mainWindow = new BrowserWindow({
