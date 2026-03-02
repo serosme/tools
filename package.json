@@ -10,7 +10,7 @@
     "nuxt:dev": "nuxt dev --port 3000",
     "nuxt:generate": "nuxt generate",
     "electron:dev": "electron .",
-    "dev": "concurrently -k -n NUXT,ELECTRON -c cyan,magenta \"npm:nuxt:dev\" \"npm:electron:dev\"",
+    "dev": "concurrently -k -n nuxt,electron -c cyan,magenta \"npm:nuxt:dev\" \"npm:electron:dev\"",
     "build": "nuxt generate && electron-builder --win"
   },
   "dependencies": {
