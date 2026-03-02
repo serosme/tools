@@ -12,7 +12,7 @@ export function createMainWindow() {
     width: 1280,
     height: 720,
     webPreferences: {
-      preload: fileURLToPath(new URL('./preload.ts', import.meta.url)),
+      preload: fileURLToPath(new URL('../preload.ts', import.meta.url)),
       sandbox: false,
       contextIsolation: true,
       nodeIntegration: false,

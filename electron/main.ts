@@ -1,7 +1,7 @@
 import { app } from 'electron'
 import { registerIpcHandlers } from './ipc.ts'
 import { createAppTray } from './tray.ts'
-import { createMainWindow, removeCloseListener, showMainWindow } from './window.ts'
+import { createMainWindow, removeCloseListener, showMainWindow } from './window/main.ts'
 
 // 注册 IPC 处理器
 registerIpcHandlers()
