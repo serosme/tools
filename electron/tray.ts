@@ -2,12 +2,14 @@ import type { MenuItemConstructorOptions } from 'electron'
 import path from 'node:path'
 import { app, Menu, Tray } from 'electron'
 
+let tray: Tray
+
 export function createAppTray(
   onTrayClick: () => void,
   ...menuItems: MenuItemConstructorOptions[]
 ) {
   const trayIconPath = path.join(app.getAppPath(), 'public', 'favicon.ico')
-  const tray = new Tray(trayIconPath)
+  tray = new Tray(trayIconPath)
 
   tray.setToolTip('tools')
 
@@ -17,6 +19,4 @@ export function createAppTray(
   }
 
   tray.on('click', onTrayClick)
-
-  return tray
 }

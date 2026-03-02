@@ -2,8 +2,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { app, BrowserWindow } from 'electron'
 
+let mainWindow: BrowserWindow
+
 export function createMainWindow() {
-  const window = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,
     webPreferences: {
@@ -15,23 +17,33 @@ export function createMainWindow() {
   })
 
   if (app.isPackaged) {
-    window.loadFile(path.join(app.getAppPath(), '.output', 'public', 'index.html'))
+    mainWindow.loadFile(path.join(app.getAppPath(), '.output', 'public', 'index.html'))
   }
   else {
-    window.loadURL('http://localhost:3000')
-    window.webContents.openDevTools()
+    mainWindow.loadURL('http://localhost:3000')
+    mainWindow.webContents.openDevTools()
   }
 
-  return window
+  // 监听窗口关闭事件，隐藏窗口而不是退出应用
+  mainWindow.on('close', (event: Electron.Event) => {
+    event.preventDefault()
+    mainWindow?.hide()
+  })
 }
 
-export function showMainWindow(window: BrowserWindow | null) {
-  if (!window)
+export function showMainWindow() {
+  if (!mainWindow) {
+    createMainWindow()
     return
+  }
 
-  if (window.isMinimized())
-    window.restore()
+  if (mainWindow.isMinimized())
+    mainWindow.restore()
 
-  window.show()
-  window.focus()
+  mainWindow.show()
+  mainWindow.focus()
+}
+
+export function removeCloseListener() {
+  mainWindow?.removeAllListeners('close')
 }
