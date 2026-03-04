@@ -1,7 +1,7 @@
-import { app } from 'electron'
+import { app, globalShortcut } from 'electron'
 import { registerIpcHandlers } from './ipc.ts'
 import { createAppTray } from './tray.ts'
-import { createMainWindow, removeCloseListener, showMainWindow } from './window/main.ts'
+import { createMainWindow, removeCloseListener, showMainWindow, toggleRecord } from './window/main.ts'
 
 // 注册 IPC 处理器
 registerIpcHandlers()
@@ -9,6 +9,9 @@ registerIpcHandlers()
 app.whenReady().then(() => {
   // 创建主窗口
   createMainWindow()
+
+  // 注册全局快捷键
+  globalShortcut.register('Shift+Space', () => toggleRecord())
 
   // 创建系统托盘
   createAppTray(

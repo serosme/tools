@@ -19,12 +19,6 @@ export function createMainWindow() {
     },
   })
 
-  // 注册全局快捷键
-  globalShortcut.register('Alt+Space', () => {
-    mainWindow.webContents.send('toggle-record')
-    // showMainWindow()
-  })
-
   if (app.isPackaged) {
     mainWindow.loadFile(path.join(app.getAppPath(), '.output', 'public', 'index.html'))
   }
@@ -55,4 +49,8 @@ export function showMainWindow() {
 
 export function removeCloseListener() {
   mainWindow?.removeAllListeners('close')
+}
+
+export function toggleRecord() {
+  mainWindow.webContents.send('app:toggleRecord')
 }
