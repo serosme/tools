@@ -1,7 +1,11 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  getVersion: () => ipcRenderer.invoke('app:getVersion'),
   showLyricWindow: () => ipcRenderer.invoke('app:showLyricWindow'),
-  typeText: (text: string) => ipcRenderer.invoke('app:typeText', text),
+  onToggleRecord: (callback: () => void) => {
+    ipcRenderer.on('toggle-record', callback)
+  },
+  sendRecognizedText: (text: string) => {
+    ipcRenderer.send('app:typeText', text)
+  },
 })

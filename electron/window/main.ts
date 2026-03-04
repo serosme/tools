@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow, globalShortcut, Menu } from 'electron'
 
 let mainWindow: BrowserWindow
 
@@ -17,6 +17,12 @@ export function createMainWindow() {
       contextIsolation: true,
       nodeIntegration: false,
     },
+  })
+
+  // 注册全局快捷键
+  globalShortcut.register('Alt+Space', () => {
+    mainWindow.webContents.send('toggle-record')
+    // showMainWindow()
   })
 
   if (app.isPackaged) {

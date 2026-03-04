@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-white min-h-screen">
-    <slot />
-  </div>
+  <UApp>
+    <div class="h-screen w-screen border border-red-500">
+      <slot />
+    </div>
+  </UApp>
 </template>

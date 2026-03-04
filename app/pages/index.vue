@@ -1,7 +1,10 @@
 <template>
-  <div class="text-center pt-10">
-    <NuxtLink to="/music">
+  <div class="flex flex-col items-center gap-4 border border-blue-500">
+    <UButton to="/music">
       音乐页面
-    </NuxtLink>
+    </UButton>
+    <UButton to="/test">
+      测试页面
+    </UButton>
   </div>
 </template>

@@ -2,10 +2,10 @@ export {}
 
 declare global {
   interface Window {
-    electronAPI?: {
-      getVersion: () => Promise<string>
+    electronAPI: {
       showLyricWindow: () => Promise<void>
-      typeText: (text: string) => Promise<void>
+      onToggleRecord: (callback: () => void) => void
+      sendRecognizedText: (text: string) => void
     }
   }
 }
