@@ -5,6 +5,7 @@
   "private": true,
   "main": "electron/main.ts",
   "scripts": {
+    "typecheck": "nuxt typecheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "nuxt:dev": "nuxt dev --port 3000",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^4.5.0",
+    "electron-store": "^11.0.2",
     "nuxt": "^4.3.1",
     "tailwindcss": "^4.2.1",
     "vue": "^3.5.28",

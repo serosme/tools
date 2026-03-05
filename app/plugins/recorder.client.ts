@@ -1,13 +1,13 @@
 export default defineNuxtPlugin(() => {
   const recorder = new AudioRecorder()
-  let isRecording = false
+  let recording = false
 
   async function recognize(blob: Blob): Promise<string> {
-    const base64 = await blobToBase64(blob)
+    const base64 = await blobToBase642(blob)
 
-    const rsp = await $fetch('/api/recognize', {
+    const rsp = await $fetch<RecognizeResponse>('/api/recognize', {
       method: 'post',
-      body: { data: base64 },
+      body: { base64 },
     })
 
     return rsp.result.text
@@ -15,13 +15,13 @@ export default defineNuxtPlugin(() => {
 
   window.electronAPI.onToggleRecord(async () => {
     try {
-      if (!isRecording) {
+      if (!recording) {
         await recorder.start()
-        isRecording = true
+        recording = true
       }
       else {
         const blob = await recorder.stop()
-        isRecording = false
+        recording = false
 
         const text = await recognize(blob)
 
@@ -30,7 +30,7 @@ export default defineNuxtPlugin(() => {
     }
     catch (err) {
       console.error(err)
-      isRecording = false
+      recording = false
     }
   })
 })

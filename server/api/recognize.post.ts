@@ -1,22 +1,24 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
+  const wrappedReqBody = await readBody<WrappedRecognizeBody>(event)
 
-  const rsp = await $fetch('https://openspeech.bytedance.com/api/v3/auc/bigmodel/recognize/flash', {
+  const reqBody: RecognizeRequestBody = {
+    audio: {
+      data: wrappedReqBody.base64,
+    },
+    request: {
+      model_name: 'bigmodel',
+    },
+  }
+
+  const rsp = await $fetch<RecognizeResponse>('https://openspeech.bytedance.com/api/v3/auc/bigmodel/recognize/flash', {
     method: 'post',
     headers: {
-      'x-api-key': '',
+      'x-api-key': '-1',
       'X-Api-Resource-Id': 'volc.bigasr.auc',
-      'X-Api-Request-Id': '1',
+      'X-Api-Request-Id': '-1',
       'X-Api-Sequence': '-1',
     },
-    body: {
-      audio: {
-        data: body.data,
-      },
-      request: {
-        model_name: 'bigmodel',
-      },
-    },
+    body: reqBody,
   })
 
   return rsp

@@ -20,9 +20,9 @@ export class AudioRecorder {
     this.recorder.start()
   }
 
-  async stop(): Promise<Blob | null> {
+  async stop(): Promise<Blob> {
     if (!this.recorder)
-      return null
+      return new Blob()
 
     const blob = await new Promise<Blob>((resolve, reject) => {
       this.recorder!.onstop = () => {
@@ -49,23 +49,27 @@ export function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
+    reader.onerror = () => reject(new Error('文件读取错误'))
+
     reader.onloadend = () => {
-      if (typeof reader.result !== 'string') {
-        reject(new Error('读取失败'))
-        return
+      const result = reader.result
+      if (typeof result !== 'string') {
+        return reject(new Error('读取失败'))
       }
 
-      const base64 = reader.result.split(',')[1]
-
-      if (!base64) {
-        reject(new Error('base64 解析失败'))
-        return
+      const i = result.indexOf(',')
+      if (i === -1) {
+        return reject(new Error('base64 解析失败'))
       }
 
-      resolve(base64)
+      resolve(result.slice(i + 1))
     }
 
-    reader.onerror = () => reject(new Error('文件读取错误'))
     reader.readAsDataURL(blob)
   })
+}
+
+export async function blobToBase642(blob: Blob) {
+  const buffer = await blob.arrayBuffer()
+  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
 }
