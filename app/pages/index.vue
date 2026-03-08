@@ -1,58 +1,68 @@
 <script setup lang="ts">
-function openGoogle() {
-  window.open('https://google.com')
-}
+const searchTerm = ref('')
 
-function openGithub() {
-  window.open('https://github.com')
-}
-
-const groups = [
+const defaultGroups = [
   {
     id: 'pages',
     label: 'Pages',
     items: [
       {
-        label: 'To Music',
+        label: 'Music',
         icon: 'i-lucide-globe',
         onSelect() {
           navigateTo('/music')
         },
+        featured: true,
       },
       {
-        label: 'To Test',
+        label: 'Test',
         icon: 'i-lucide-globe',
         onSelect() {
           navigateTo('/test')
         },
-      },
-    ],
-  },
-  {
-    id: 'apps',
-    label: 'Applications',
-    items: [
-      {
-        label: 'Open Google',
-        icon: 'i-lucide-globe',
-        onSelect() {
-          openGoogle()
-        },
-      },
-      {
-        label: 'Open Github',
-        icon: 'i-lucide-github',
-        onSelect() {
-          openGithub()
-        },
+        featured: true,
       },
     ],
   },
 ]
+
+const groups = ref([...defaultGroups])
+
+window.electronAPI.getApplications().then((apps) => {
+  const appItems = apps.map(app => ({
+    label: app.name,
+    icon: 'i-lucide-app-window',
+    onSelect() {
+      window.electronAPI.launchApplication(app.appId)
+    },
+    featured: false,
+  }))
+
+  groups.value.push({
+    id: 'installed-apps',
+    label: 'Installed Applications',
+    items: appItems,
+  })
+})
+
+function postFilter(search: string, items: any[]) {
+  if (!search) {
+    return items.filter(i => i.featured)
+  }
+  return items
+}
+
+const computedGroups = computed(() => {
+  return groups.value.map(g => ({
+    ...g,
+    postFilter,
+  }))
+})
 </script>
 
 <template>
   <UCommandPalette
-    :groups="groups"
+    v-model:search-term="searchTerm"
+    :groups="computedGroups"
   />
 </template>

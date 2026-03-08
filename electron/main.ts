@@ -1,5 +1,4 @@
 import { app, globalShortcut } from 'electron'
-import { getStartMenuShortcuts } from './a.ts'
 import { registerIpcHandlers } from './ipc.ts'
 import { createAppTray } from './tray.ts'
 import { createMainWindow, removeCloseListener, showMainWindow, toggleRecord } from './window/main.ts'
@@ -13,10 +12,6 @@ app.whenReady().then(() => {
 
   // 注册全局快捷键
   globalShortcut.register('Shift+Space', () => toggleRecord())
-
-  // 获取
-  const shortcuts = getStartMenuShortcuts()
-  console.log(shortcuts)
 
   // 创建系统托盘
   createAppTray(

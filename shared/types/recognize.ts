@@ -33,3 +33,8 @@ export interface RecognizeResponse {
     }[]
   }
 }
+
+export interface Application {
+  name: string
+  appId: string
+}
