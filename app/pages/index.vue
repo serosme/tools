@@ -1,68 +1,79 @@
 <script setup lang="ts">
+import { useMagicKeys } from '@vueuse/core'
+import { watch } from 'vue'
+
+const { space } = useMagicKeys()
+
+watch(space, (pressed) => {
+  if (pressed) {
+    console.log('空格键被按下')
+  }
+  else {
+    console.log('空格键抬起')
+  }
+})
+
 const searchTerm = ref('')
 
-const defaultGroups = [
+// Pages
+const pages = [
   {
-    id: 'pages',
-    label: 'Pages',
-    items: [
-      {
-        label: 'Music',
-        icon: 'i-lucide-globe',
-        onSelect() {
-          navigateTo('/music')
-        },
-        featured: true,
-      },
-      {
-        label: 'Test',
-        icon: 'i-lucide-globe',
-        onSelect() {
-          navigateTo('/test')
-        },
-        featured: true,
-      },
-    ],
+    label: 'Music',
+    icon: 'i-lucide-globe',
+    onSelect() { navigateTo('/music') },
+  },
+  {
+    label: 'Test',
+    icon: 'i-lucide-globe',
+    onSelect() { navigateTo('/test') },
   },
 ]
 
-const groups = ref([...defaultGroups])
-
+// Applications
+const appItems = ref<any[]>([])
 window.electronAPI.getApplications().then((apps) => {
-  const appItems = apps.map(app => ({
+  appItems.value = apps.map(app => ({
     label: app.name,
     icon: 'i-lucide-app-window',
-    onSelect() {
-      window.electronAPI.launchApplication(app.appId)
-    },
-    featured: false,
+    onSelect() { window.electronAPI.launchApplication(app.appId) },
   }))
+})
 
-  groups.value.push({
-    id: 'installed-apps',
-    label: 'Installed Applications',
-    items: appItems,
+// 分组数组
+const groups = computed(() => [
+  {
+    id: 'pages',
+    label: 'Pages',
+    items: pages,
+  },
+  {
+    id: 'applications',
+    label: 'Applications',
+    items: appItems.value,
+  },
+])
+
+onMounted(() => {
+  window.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      searchTerm.value = ''
+    }
   })
 })
 
-function postFilter(search: string, items: any[]) {
-  if (!search) {
-    return items.filter(i => i.featured)
-  }
-  return items
-}
-
-const computedGroups = computed(() => {
-  return groups.value.map(g => ({
-    ...g,
-    postFilter,
-  }))
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', () => {})
 })
 </script>
 
 <template>
   <UCommandPalette
     v-model:search-term="searchTerm"
-    :groups="computedGroups"
+    :groups="groups"
+    :fuse="{
+      resultLimit: 7,
+      matchAllWhenSearchEmpty: false,
+    }"
+    :autofocus="false"
   />
 </template>
