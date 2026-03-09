@@ -1,4 +1,7 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'lyric',
+})
 </script>
 
 <template>
