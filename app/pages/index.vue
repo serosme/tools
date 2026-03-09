@@ -1,18 +1,4 @@
 <script setup lang="ts">
-import { useMagicKeys } from '@vueuse/core'
-import { watch } from 'vue'
-
-const { space } = useMagicKeys()
-
-watch(space, (pressed) => {
-  if (pressed) {
-    console.log('空格键被按下')
-  }
-  else {
-    console.log('空格键抬起')
-  }
-})
-
 const searchTerm = ref('')
 
 // Pages
@@ -20,12 +6,17 @@ const pages = [
   {
     label: 'Music',
     icon: 'i-lucide-globe',
-    onSelect() { navigateTo('/music') },
+    onSelect: selectAndClear(() => navigateTo('/music')),
   },
   {
     label: 'Test',
     icon: 'i-lucide-globe',
-    onSelect() { navigateTo('/test') },
+    onSelect: selectAndClear(() => navigateTo('/test')),
+  },
+  {
+    label: 'Recorder',
+    icon: 'i-lucide-globe',
+    onSelect: selectAndClear(() => navigateTo('/recorder')),
   },
 ]
 
@@ -35,7 +26,9 @@ window.electronAPI.getApplications().then((apps) => {
   appItems.value = apps.map(app => ({
     label: app.name,
     icon: 'i-lucide-app-window',
-    onSelect() { window.electronAPI.launchApplication(app.appId) },
+    onSelect: selectAndClear(() =>
+      window.electronAPI.launchApplication(app.appId),
+    ),
   }))
 })
 
@@ -53,17 +46,12 @@ const groups = computed(() => [
   },
 ])
 
-onMounted(() => {
-  window.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      searchTerm.value = ''
-    }
-  })
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', () => {})
-})
+function selectAndClear(fn: () => void) {
+  return () => {
+    searchTerm.value = ''
+    fn()
+  }
+}
 </script>
 
 <template>
@@ -74,6 +62,5 @@ onBeforeUnmount(() => {
       resultLimit: 7,
       matchAllWhenSearchEmpty: false,
     }"
-    :autofocus="false"
   />
 </template>
