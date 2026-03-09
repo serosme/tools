@@ -11,6 +11,7 @@ export function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,
+    skipTaskbar: true,
     webPreferences: {
       preload: fileURLToPath(new URL('../preload.ts', import.meta.url)),
       sandbox: false,
@@ -32,25 +33,33 @@ export function createMainWindow() {
     event.preventDefault()
     mainWindow?.hide()
   })
+
+  // 监听窗口失焦事件，失焦时隐藏窗口
+  mainWindow.on('blur', () => {
+    hideMainWindow()
+  })
 }
 
 export function showMainWindow() {
-  if (!mainWindow) {
-    createMainWindow()
-    return
+  if (!mainWindow.isVisible()) {
+    mainWindow.show()
+    mainWindow.focus()
   }
+}
 
-  if (mainWindow.isMinimized())
-    mainWindow.restore()
+export function hideMainWindow() {
+  mainWindow.hide()
+}
 
-  mainWindow.show()
-  mainWindow.focus()
+export function toggleMainWindow() {
+  if (mainWindow.isVisible()) {
+    hideMainWindow()
+  }
+  else {
+    showMainWindow()
+  }
 }
 
 export function removeCloseListener() {
   mainWindow?.removeAllListeners('close')
-}
-
-export function toggleRecord() {
-  mainWindow.webContents.send('app:toggleRecord')
 }
