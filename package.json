@@ -35,7 +35,8 @@
     "productName": "Tools",
     "npmRebuild": false,
     "win": {
-      "target": "portable"
+      "target": "portable",
+      "sign": false
     },
     "portable": {
       "artifactName": "${productName}-${version}.${ext}"
