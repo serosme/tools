@@ -37,9 +37,6 @@
     "asar": true,
     "win": {
       "target": "zip"
-    },
-    "portable": {
-      "artifactName": "${productName}-${version}.${ext}"
     }
   }
 }
