@@ -38,7 +38,9 @@
     "win": {
       "target": [
         "portable",
-        "nsis"
+        "nsis",
+        "dir",
+        "zip"
       ]
     },
     "portable": {
