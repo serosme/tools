@@ -12,7 +12,7 @@
     "nuxt:generate": "nuxt generate",
     "electron:dev": "electron .",
     "dev": "concurrently -k -n nuxt,electron -c cyan,magenta \"npm:nuxt:dev\" \"npm:electron:dev\"",
-    "build": "nuxt generate && electron-builder --publish always"
+    "build": "nuxt generate && electron-builder"
   },
   "dependencies": {
     "@nuxt/ui": "^4.5.0",
