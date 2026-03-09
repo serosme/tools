@@ -12,7 +12,7 @@
     "nuxt:generate": "nuxt generate",
     "electron:dev": "electron .",
     "dev": "concurrently -k -n nuxt,electron -c cyan,magenta \"npm:nuxt:dev\" \"npm:electron:dev\"",
-    "build": "nuxt generate && electron-builder --win"
+    "build": "nuxt generate && electron-builder"
   },
   "dependencies": {
     "@nuxt/ui": "^4.5.0",
@@ -36,12 +36,7 @@
     "npmRebuild": false,
     "asar": true,
     "win": {
-      "target": [
-        "portable",
-        "nsis",
-        "dir",
-        "zip"
-      ]
+      "target": "zip"
     },
     "portable": {
       "artifactName": "${productName}-${version}.${ext}"
