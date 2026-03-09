@@ -35,6 +35,7 @@
     "productName": "Tools",
     "npmRebuild": false,
     "asar": true,
+    "publish": "always",
     "win": {
       "target": "zip"
     }
