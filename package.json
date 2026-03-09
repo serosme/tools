@@ -12,7 +12,7 @@
     "nuxt:generate": "nuxt generate",
     "electron:dev": "electron .",
     "dev": "concurrently -k -n nuxt,electron -c cyan,magenta \"npm:nuxt:dev\" \"npm:electron:dev\"",
-    "build": "nuxt generate && electron-builder"
+    "build": "nuxt generate && electron-builder --publish always"
   },
   "dependencies": {
     "@nuxt/ui": "^4.5.0",
@@ -35,7 +35,6 @@
     "productName": "Tools",
     "npmRebuild": false,
     "asar": true,
-    "publish": "always",
     "win": {
       "target": "zip"
     }
