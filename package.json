@@ -36,10 +36,11 @@
     "npmRebuild": false,
     "asar": true,
     "win": {
-      "target": "portable",
-      "signAndEditExecutable": false
+      "target": [
+        "portable",
+        "nsis"
+      ]
     },
-    "forceCodeSigning": false,
     "portable": {
       "artifactName": "${productName}-${version}.${ext}"
     }
