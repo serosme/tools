@@ -10,8 +10,10 @@ Menu.setApplicationMenu(null)
 export function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
-    height: 720,
+    height: 540,
     skipTaskbar: true,
+    transparent: true,
+    // frame: false,
     webPreferences: {
       preload: fileURLToPath(new URL('../preload.ts', import.meta.url)),
       sandbox: false,

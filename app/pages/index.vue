@@ -55,12 +55,15 @@ function selectAndClear(fn: () => void) {
 </script>
 
 <template>
-  <UCommandPalette
-    v-model:search-term="searchTerm"
-    :groups="groups"
-    :fuse="{
-      resultLimit: 7,
-      matchAllWhenSearchEmpty: false,
-    }"
-  />
+  <div class="bg-white">
+    <UCommandPalette
+      v-model:search-term="searchTerm"
+      :groups="groups"
+      :fuse="{
+        resultLimit: 7,
+        matchAllWhenSearchEmpty: false,
+      }"
+      class="border-2 border-red-500"
+    />
+  </div>
 </template>
