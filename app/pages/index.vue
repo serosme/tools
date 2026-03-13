@@ -4,6 +4,11 @@ const searchTerm = ref('')
 // Pages
 const pages = [
   {
+    label: 'Chat',
+    icon: 'i-lucide-globe',
+    onSelect: selectAndClear(() => navigateTo('/chat')),
+  },
+  {
     label: 'Music',
     icon: 'i-lucide-globe',
     onSelect: selectAndClear(() => navigateTo('/music')),
