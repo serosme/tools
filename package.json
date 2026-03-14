@@ -38,8 +38,6 @@
     "npmRebuild": false,
     "asar": true,
     "nsis": {
-      "artifactName": "${productName} Setup ${version}.${ext}",
-      "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": false,
       "deleteAppDataOnUninstall": true
     }
