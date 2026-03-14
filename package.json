@@ -38,7 +38,15 @@
     "npmRebuild": false,
     "asar": true,
     "win": {
-      "target": "zip"
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "createDesktopShortcut": false
     }
   }
 }
