@@ -37,16 +37,11 @@
     "productName": "Tools",
     "npmRebuild": false,
     "asar": true,
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": ["x64"]
-        }
-      ]
-    },
     "nsis": {
-      "createDesktopShortcut": false
+      "artifactName": "${productName} Setup ${version}.${ext}",
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "deleteAppDataOnUninstall": true
     }
   }
 }
