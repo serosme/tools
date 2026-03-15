@@ -9,10 +9,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "nuxt:dev": "nuxt dev --port 3000",
-    "nuxt:generate": "nuxt generate",
     "electron:dev": "electron .",
     "dev": "concurrently -k -n nuxt,electron -c cyan,magenta \"npm:nuxt:dev\" \"npm:electron:dev\"",
-    "build": "nuxt generate && electron-builder --publish=never"
+    "build": "nuxt build && electron-builder --publish=never"
   },
   "dependencies": {
     "@nuxt/ui": "^4.5.0",

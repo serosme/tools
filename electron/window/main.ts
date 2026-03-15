@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { app, BrowserWindow, Menu } from 'electron'
 
 let mainWindow: BrowserWindow
@@ -23,12 +23,11 @@ export function createMainWindow() {
   })
 
   if (app.isPackaged) {
-    mainWindow.loadFile(path.join(app.getAppPath(), '.output', 'public', 'index.html'))
+    import(pathToFileURL(path.join(app.getAppPath(), '.output', 'server', 'index.mjs')).href)
   }
-  else {
-    mainWindow.loadURL('http://localhost:3000')
-    // mainWindow.webContents.openDevTools()
-  }
+
+  mainWindow.loadURL('http://localhost:3000')
+  mainWindow.webContents.openDevTools()
 
   // 监听窗口关闭事件，隐藏窗口而不是退出应用
   mainWindow.on('close', (event: Electron.Event) => {

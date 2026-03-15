@@ -1,6 +1,11 @@
+<script setup>
+const { data } = await useFetch('/api/hello')
+const msg = data.value?.msg
+</script>
+
 <template>
-  <div class="test">
-    <h1>Test Page</h1>
-    <p>This is a test page to demonstrate the layout and styling.</p>
+  <div>
+    <h1>Nuxt inside Electron</h1>
+    <p>{{ msg }}</p>
   </div>
 </template>
