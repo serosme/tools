@@ -1,0 +1,28 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "ncu": "npx npm-check-updates --workspaces --target minor",
+    "ncuu": "npx npm-check-updates --workspaces --target minor -u",
+    "dev": "concurrently \"npm run dev --workspace packages/tools-electron\" \"npm run dev --workspace packages/tools-nuxt\"",
+    "preview": "npm run preview --workspace packages/tools-electron",
+    "build": "npm run build --workspace packages/tools-electron",
+    "version:patch": "npm version patch --workspaces --include-workspace-root --no-git-tag-version",
+    "version:minor": "npm version minor --workspaces --include-workspace-root --no-git-tag-version",
+    "version:major": "npm version major --workspaces --include-workspace-root --no-git-tag-version"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.0.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.4.1",
+    "eslint-plugin-format": "^2.0.1"
+  }
+}

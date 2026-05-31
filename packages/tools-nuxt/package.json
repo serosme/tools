@@ -1,0 +1,25 @@
+{
+  "name": "tools-nuxt",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build"
+  },
+  "dependencies": {
+    "@nuxt/icon": "^2.2.2",
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/ui": "^4.8.1",
+    "conf": "^15.1.0",
+    "nuxt": "^4.4.6",
+    "taglib-wasm": "^1.2.1",
+    "tailwindcss": "^4.3.0",
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.111",
+    "@iconify-json/solar": "^1.2.5",
+    "tools-shared": "file:../tools-shared"
+  }
+}

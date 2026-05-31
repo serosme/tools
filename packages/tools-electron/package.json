@@ -1,0 +1,40 @@
+{
+  "name": "tools-electron",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsc -p tsconfig.json && cross-env NODE_ENV=dev electron .",
+    "preview": "npm --prefix ../tools-nuxt run build && tsc -p tsconfig.json && cross-env NODE_ENV=preview electron .",
+    "build": "npm --prefix ../tools-nuxt run build && tsc -p tsconfig.json && electron-builder --win"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.4",
+    "cross-env": "^10.1.0",
+    "electron": "42.3.0",
+    "electron-builder": "^26.12.1",
+    "tools-shared": "file:../tools-shared",
+    "typescript": "^6.0.3"
+  },
+  "build": {
+    "appId": "tools",
+    "productName": "tools",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "electronLanguages": [
+      "zh-CN"
+    ],
+    "asar": false,
+    "extraResources": [
+      {
+        "from": "../tools-nuxt/.output",
+        "to": "tools-nuxt/.output"
+      }
+    ],
+    "win": {
+      "target": "zip"
+    }
+  }
+}
