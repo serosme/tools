@@ -6,7 +6,7 @@ on:
 name: release
 
 jobs:
-  build-and-release:
+  release:
     runs-on: windows-latest
     permissions:
       contents: write
