@@ -19,7 +19,7 @@
   "build": {
     "appId": "tools",
     "productName": "tools",
-    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "artifactName": "${productName}-${os}-${arch}.${ext}",
     "directories": {
       "output": "release"
     },
