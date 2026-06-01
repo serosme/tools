@@ -1,7 +1,7 @@
 {
   "name": "tools-electron",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/main.js",
   "scripts": {
     "dev": "tsc -p tsconfig.json && cross-env NODE_ENV=dev electron .",
