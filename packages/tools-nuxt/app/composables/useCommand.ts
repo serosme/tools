@@ -60,6 +60,24 @@ export function useCommand() {
     })),
   )
 
+  const { data: terminalProfiles } = useFetch('/api/terminal', {
+    default: () => [],
+    transform: data => data || [],
+    onRequestError: (err) => {
+      console.error('请求终端配置文件失败:', err)
+    },
+    onResponseError: (err) => {
+      console.error('获取终端配置文件响应错误:', err)
+    },
+  }) as { data: Ref<string[]> }
+  const terminals = computed<CommandPaletteItem[]>(() =>
+    terminalProfiles.value.map(name => ({
+      label: name,
+      icon: 'i-lucide-terminal',
+      onSelect: () => $fetch(`/api/terminal/open?name=${encodeURIComponent(name)}`),
+    })),
+  )
+
   const commands = computed<CommandPaletteItem[]>(() => [
     {
       label: 'mihomo',
@@ -116,6 +134,11 @@ export function useCommand() {
       items: commands.value,
     },
     {
+      id: 'terminals',
+      label: 'Terminals',
+      items: terminals.value,
+    },
+    {
       id: 'folders',
       label: 'Folders',
       items: folders,
@@ -131,7 +154,5 @@ export function useCommand() {
     groups,
     pages,
     commands,
-    folders,
-    apps,
   }
 }
