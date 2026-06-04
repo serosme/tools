@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { app, BrowserWindow } from 'electron'
-import { loadURL, openDevTools } from '../utils/window.js'
+import { loadURL } from '../utils/window.js'
 
 let window: BrowserWindow
 
@@ -28,7 +28,6 @@ export function useCommand() {
     })
 
     await loadURL(window)
-    openDevTools(window)
 
     // 监听
     window.once('ready-to-show', () => {

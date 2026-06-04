@@ -1,8 +1,7 @@
-import type { BrowserWindow } from 'electron'
 import path from 'node:path'
 import process from 'node:process'
 import { pathToFileURL } from 'node:url'
-import { app } from 'electron'
+import { app, BrowserWindow } from 'electron'
 
 async function waitForServer(url: string, timeout = 15000) {
   const start = Date.now()
@@ -28,8 +27,9 @@ export async function loadURL(window: BrowserWindow) {
   window.loadURL('http://localhost:3000')
 }
 
-export function openDevTools(window: BrowserWindow) {
-  if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'preview') {
-    window.webContents.openDevTools()
+export function toggleDevToolsForFocusedWindow() {
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  if (focusedWindow) {
+    focusedWindow.webContents.toggleDevTools()
   }
 }

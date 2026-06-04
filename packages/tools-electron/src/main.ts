@@ -3,7 +3,7 @@ import { pathIpc } from './ipc/path.js'
 import { relayIpc } from './ipc/relay.js'
 import { windowIpc } from './ipc/window.js'
 import { createAppTray } from './tray/index.js'
-import { startRendererProcess } from './utils/window.js'
+import { startRendererProcess, toggleDevToolsForFocusedWindow } from './utils/window.js'
 import { useCommand } from './window/command.js'
 
 // 移除默认菜单栏
@@ -24,6 +24,7 @@ app.whenReady().then(async () => {
 
   // 注册全局快捷键
   globalShortcut.register('Alt+Space', () => toggle())
+  globalShortcut.register('Ctrl+Shift+D', () => toggleDevToolsForFocusedWindow())
 
   // 创建系统托盘
   createAppTray(

@@ -20,7 +20,6 @@ export function createWindow(routePath: string): number {
   })
 
   newWindow.loadURL(`http://localhost:3000${routePath}`)
-  newWindow.webContents.openDevTools()
 
   return newWindow.id
 }
