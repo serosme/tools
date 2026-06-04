@@ -17,11 +17,6 @@ const items: NavigationMenuItem[] = [
     icon: 'i-lucide-mic',
     to: '/setting/asr',
   },
-  {
-    label: 'Relay',
-    icon: 'i-lucide-mic',
-    to: '/setting/relay',
-  },
 ]
 </script>
 

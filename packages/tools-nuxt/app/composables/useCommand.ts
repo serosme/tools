@@ -3,9 +3,6 @@ import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
 export function useCommand() {
   const router = useRouter()
   const toast = useToast()
-  const routeActions: Record<string, () => void> = {
-    '/chat': () => electron.relay.open(),
-  }
   const pages = computed<CommandPaletteItem[]>(() =>
     router.getRoutes()
       .filter((route) => {
@@ -15,7 +12,7 @@ export function useCommand() {
       .map(route => ({
         label: route.path.slice(1).charAt(0).toUpperCase() + route.path.slice(2),
         icon: 'i-lucide-globe',
-        onSelect: routeActions[route.path] ?? (() => electron.window.create(route.path)),
+        onSelect: () => electron.window.create(route.path),
       })),
   )
 

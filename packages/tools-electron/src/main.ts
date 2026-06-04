@@ -1,6 +1,5 @@
 import { app, globalShortcut, Menu } from 'electron'
 import { pathIpc } from './ipc/path.js'
-import { relayIpc } from './ipc/relay.js'
 import { windowIpc } from './ipc/window.js'
 import { createAppTray } from './tray/index.js'
 import { startRendererProcess, toggleDevToolsForFocusedWindow } from './utils/window.js'
@@ -20,7 +19,6 @@ app.whenReady().then(async () => {
   // 注册 IPC
   pathIpc()
   windowIpc()
-  relayIpc()
 
   // 注册全局快捷键
   globalShortcut.register('Alt+Space', () => toggle())
