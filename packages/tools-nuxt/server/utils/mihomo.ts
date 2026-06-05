@@ -1,16 +1,24 @@
 import { spawn, spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises'
-import os from 'node:os'
 import { join } from 'node:path'
 import process from 'node:process'
+import conf from './conf.js'
 
-const mihomoDir = join(os.homedir(), '.config', 'mihomo')
-const exePath = join(mihomoDir, 'mihomo.exe')
-const pidFile = join(mihomoDir, 'mihomo.pid')
+function getMihomoDir(): string {
+  return conf.get('mihomo').path
+}
+
+function getExePath(): string {
+  return join(getMihomoDir(), 'mihomo.exe')
+}
+
+function getPidFile(): string {
+  return join(getMihomoDir(), 'mihomo.pid')
+}
 
 async function ensureDir() {
-  await mkdir(mihomoDir, { recursive: true })
+  await mkdir(getMihomoDir(), { recursive: true })
 }
 
 function runElevatedPowerShell(script: string) {
@@ -33,10 +41,10 @@ export async function startMihomo(admin = false) {
     return startMihomoAsAdmin()
   }
 
-  const child = spawn(exePath, [], {
+  const child = spawn(getExePath(), [], {
     detached: true,
     stdio: 'ignore',
-    cwd: mihomoDir,
+    cwd: getMihomoDir(),
   })
 
   child.unref()
@@ -51,14 +59,14 @@ async function startMihomoAsAdmin() {
 
   const result = runElevatedPowerShell([
     `$psi = New-Object System.Diagnostics.ProcessStartInfo`,
-    `$psi.FileName = '${esc(exePath)}'`,
+    `$psi.FileName = '${esc(getExePath())}'`,
     `$psi.Arguments = ''`,
     `$psi.Verb = 'runas'`,
     `$psi.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Hidden`,
-    `$psi.WorkingDirectory = '${esc(mihomoDir)}'`,
+    `$psi.WorkingDirectory = '${esc(getMihomoDir())}'`,
     `$psi.UseShellExecute = $true`,
     `$p = [System.Diagnostics.Process]::Start($psi)`,
-    `$p.Id | Out-File -FilePath '${esc(pidFile)}' -Encoding utf8`,
+    `$p.Id | Out-File -FilePath '${esc(getPidFile())}' -Encoding utf8`,
   ].join('; '))
 
   if (result.error) {
@@ -113,7 +121,7 @@ export async function getMihomoStatus() {
 
 async function readPid(): Promise<number | null> {
   try {
-    const pidStr = (await readFile(pidFile, 'utf-8')).trim()
+    const pidStr = (await readFile(getPidFile(), 'utf-8')).trim()
     const pid = Number(pidStr)
     if (!Number.isInteger(pid) || pid <= 0) {
       return null
@@ -136,15 +144,15 @@ async function readPid(): Promise<number | null> {
 }
 
 async function writePid(pid: number) {
-  await writeFile(pidFile, String(pid), 'utf-8')
+  await writeFile(getPidFile(), String(pid), 'utf-8')
 }
 
 async function removePid() {
-  if (existsSync(pidFile)) {
-    await unlink(pidFile)
+  if (existsSync(getPidFile())) {
+    await unlink(getPidFile())
   }
 }
 
 export function available() {
-  return { available: existsSync(exePath) }
+  return { available: existsSync(getExePath()) }
 }

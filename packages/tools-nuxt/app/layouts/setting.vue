@@ -13,6 +13,11 @@ const items: NavigationMenuItem[] = [
     to: '/setting/music',
   },
   {
+    label: 'Mihomo',
+    icon: 'i-lucide-shield',
+    to: '/setting/mihomo',
+  },
+  {
     label: 'Asr',
     icon: 'i-lucide-mic',
     to: '/setting/asr',
