@@ -1,6 +1,7 @@
 import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
 
 export function useCommand() {
+  const searchTerm = ref('')
   const router = useRouter()
   const toast = useToast()
   const pages = computed<CommandPaletteItem[]>(() =>
@@ -119,6 +120,31 @@ export function useCommand() {
     }
   }
 
+  const quicks = computed<CommandPaletteItem[]>(() => {
+    const term = searchTerm.value.trim()
+    if (!term)
+      return []
+
+    const chars = [...term].length
+
+    return [
+      {
+        label: 'Google 搜索',
+        suffix: term,
+        icon: 'i-lucide-search',
+        onSelect: () => {
+          electron.shell.openExternal(`https://www.google.com/search?q=${encodeURIComponent(term)}`)
+        },
+      },
+      {
+        label: '统计字符',
+        suffix: `${chars} 字符`,
+        icon: 'i-lucide-text',
+        onSelect: () => { },
+      },
+    ]
+  })
+
   const groups = computed<CommandPaletteGroup[]>(() => [
     {
       id: 'pages',
@@ -145,9 +171,16 @@ export function useCommand() {
       label: 'Applications',
       items: apps.value,
     },
+    {
+      id: 'quicks',
+      label: 'Quicks',
+      items: quicks.value,
+      ignoreFilter: true,
+    },
   ])
 
   return {
+    searchTerm,
     groups,
     pages,
     commands,

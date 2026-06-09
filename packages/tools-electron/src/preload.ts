@@ -15,6 +15,10 @@ const electronAPI: ElectronAPI = {
     },
   },
 
+  shell: {
+    openExternal: (url: string) => invoke('shell:openExternal', url),
+  },
+
   window: {
     create: (path: string) => invoke('window:create', path),
     close: (id: number) => invoke('window:close', id),

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { groups, pages, commands } = useCommand()
-const searchTerm = ref('')
+const { searchTerm, groups, pages, commands } = useCommand()
 </script>
 
 <template>
@@ -12,7 +11,6 @@ const searchTerm = ref('')
       matchAllWhenSearchEmpty: false,
     }"
     @update:model-value="searchTerm = ''"
-    @keydown.escape="searchTerm = ''"
     @keydown.space.prevent
   />
 </template>

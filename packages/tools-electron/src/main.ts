@@ -1,5 +1,6 @@
 import { app, globalShortcut, Menu } from 'electron'
 import { pathIpc } from './ipc/path.js'
+import { shellIpc } from './ipc/shell.js'
 import { windowIpc } from './ipc/window.js'
 import { createAppTray } from './tray/index.js'
 import { startRendererProcess, toggleDevToolsForFocusedWindow } from './utils/window.js'
@@ -18,6 +19,7 @@ app.whenReady().then(async () => {
 
   // 注册 IPC
   pathIpc()
+  shellIpc()
   windowIpc()
 
   // 注册全局快捷键
