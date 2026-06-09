@@ -10,8 +10,8 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "ncu": "npx npm-check-updates --workspaces --target minor",
-    "ncuu": "npx npm-check-updates --workspaces --target minor -u",
+    "ncu": "npx --yes npm-check-updates --workspaces --target minor",
+    "ncuu": "npx --yes npm-check-updates --workspaces --target minor -u",
     "dev": "concurrently \"npm run dev --workspace packages/tools-electron\" \"npm run dev --workspace packages/tools-nuxt\"",
     "preview": "npm run preview --workspace packages/tools-electron",
     "build": "npm run build --workspace packages/tools-electron",
