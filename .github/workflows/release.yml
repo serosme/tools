@@ -1,9 +1,13 @@
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 name: release
+
+concurrency:
+  group: release
+  cancel-in-progress: true
 
 jobs:
   release:
@@ -27,11 +31,44 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          $tag = "${{ github.ref_name }}"
-          $archive = Get-ChildItem -Path packages/tools-electron/release/*.zip | Select-Object -First 1
+          $ErrorActionPreference = "Stop"
 
-          gh release create "$tag" `
+          $archive = Get-ChildItem -Path packages/tools-electron/release/*.zip |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $archive) {
+            Write-Error "No zip archive found in packages/tools-electron/release/"
+            exit 1
+          }
+
+          $releases = gh release list --limit 100 --json tagName | ConvertFrom-Json
+          foreach ($r in $releases) {
+            gh release delete $r.tagName --yes --cleanup-tag 2>$null
+          }
+
+          git fetch --tags
+          $remoteTags = git ls-remote --tags origin | ForEach-Object { ($_ -split "\s+")[1] -replace "^refs/tags/", "" }
+          foreach ($tag in $remoteTags) {
+            git push origin --delete $tag 2>$null
+          }
+
+          git tag -l | ForEach-Object { git tag -d $_ 2>$null }
+
+          $tag = git rev-parse --short HEAD
+          git tag $tag
+          git push origin $tag
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Failed to push tag $tag"
+            exit 1
+          }
+
+          gh release create $tag `
             --title "$tag" `
-            --generate-notes `
+            --notes "" `
             --repo "${{ github.repository }}" `
             "$($archive.FullName)"
+
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Failed to create release"
+            exit 1
+          }
