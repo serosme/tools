@@ -1,6 +1,5 @@
 import { createReadStream, statSync } from 'node:fs'
 import { extname, join } from 'node:path'
-import { defineEventHandler, getHeader, setHeader, setResponseStatus } from 'h3'
 
 const musicDir = conf.get('music').path
 
@@ -9,18 +8,17 @@ const mime: Record<string, string> = {
   '.mp3': 'audio/mpeg',
 }
 
-export default defineEventHandler<{ routerParams: { id: string } }>((event) => {
-  const { id } = getRouterParams(event) as { id: string }
+export default defineEventHandler((event) => {
+  const { id } = getQuery(event) as { id: string }
   if (!id) {
     return
   }
 
-  const name = base64urlDecode(id)
-  const path = join(musicDir, name)
+  const path = join(musicDir, id)
   const size = statSync(path).size
   const range = getHeader(event, 'range')
 
-  setHeader(event, 'Content-Type', mime[extname(name)] || 'application/octet-stream')
+  setHeader(event, 'Content-Type', mime[extname(id)] || 'application/octet-stream')
   setHeader(event, 'Accept-Ranges', 'bytes')
 
   if (!range) {

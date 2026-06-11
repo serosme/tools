@@ -6,10 +6,9 @@ import { applyTags } from 'taglib-wasm/simple'
 const musicDir = conf.get('music').path
 
 export default defineEventHandler(async (event) => {
-  const { id } = getRouterParams(event) as { id: string }
+  const { id } = getQuery(event) as { id: string }
   const body = await readBody(event) as { title?: string, artist?: string, album?: string }
-  const name = base64urlDecode(id)
-  const path = join(musicDir, name)
+  const path = join(musicDir, id)
 
   const buffer = await readFile(path)
   const modified = await applyTags(buffer, {

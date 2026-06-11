@@ -20,7 +20,7 @@ export default defineEventHandler(async (): Promise<Music[]> => {
     const tags = await readTags(buffer)
 
     result.push({
-      id: base64urlEncode(file),
+      id: file,
       index: files.indexOf(file),
       title: tags.title?.find(() => true) || '未知歌曲',
       artist: tags.artist?.find(() => true) || '未知艺术家',

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { base64urlDecode } from '#shared/utils/base64url'
 
 interface Props {
   open: boolean
@@ -17,7 +16,7 @@ const open = ref(props.open)
 const tags = ref({ title: '', artist: '', album: '' })
 const saving = ref(false)
 
-const filename = computed(() => base64urlDecode(String(props.id)))
+const filename = computed(() => String(props.id))
 
 watch(() => props.open, (newVal) => {
   open.value = newVal
@@ -31,7 +30,7 @@ watch(open, (newVal) => {
 
 async function loadTags() {
   try {
-    tags.value = await $fetch(`/api/music/${props.id}/tags`)
+    tags.value = await $fetch('/api/music/tags', { params: { id: props.id } })
   }
   finally {
     // noop
@@ -41,8 +40,9 @@ async function loadTags() {
 async function onSubmit() {
   saving.value = true
   try {
-    await $fetch(`/api/music/${props.id}/tags`, {
+    await $fetch('/api/music/tags', {
       method: 'PUT',
+      params: { id: props.id },
       body: tags.value,
     })
     toast.add({ title: '成功', color: 'success', duration: 1200 })

@@ -1,22 +1,18 @@
 import { spawn } from 'node:child_process'
 
 export default defineEventHandler(async (event): Promise<{ success: boolean }> => {
-  const base64url = getRouterParam(event, 'base64url')
+  const { id } = getQuery(event) as { id: string }
 
-  if (!base64url) {
+  if (!id) {
     return { success: false }
   }
 
   try {
-    const id = base64urlDecode(base64url)
-
     const child = spawn('explorer.exe', [`shell:AppsFolder\\${id}`], {
       detached: true,
       stdio: 'ignore',
     })
-
     child.unref()
-
     return { success: true }
   }
   catch (error) {

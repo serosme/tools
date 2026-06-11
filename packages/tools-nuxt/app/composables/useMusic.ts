@@ -10,13 +10,14 @@ export function useMusic() {
       index: 0,
       title: '未知歌曲',
       artist: '未知艺术家',
-      base64url: '',
+      duration: 0,
     }
   })
   const src = computed(() => {
-    if (!current.value)
+    if (!current.value.id)
       return ''
-    return `/api/music/${current.value.id}`
+    const params = new URLSearchParams({ id: current.value.id })
+    return `/api/music/stream?${params.toString()}`
   })
   const { playing, currentTime, duration, volume } = useMediaControls(
     audio,

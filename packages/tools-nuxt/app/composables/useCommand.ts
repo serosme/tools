@@ -28,22 +28,22 @@ export function useCommand() {
     {
       label: 'Download',
       icon: 'i-lucide-download',
-      onSelect: () => $fetch(`/api/folder/${base64urlEncode('C:\\Users\\User\\Downloads')}`),
+      onSelect: () => $fetch('/api/folder/open', { params: { path: 'C:\\Users\\User\\Downloads' } }),
     },
     {
       label: 'Document',
       icon: 'i-lucide-folder',
-      onSelect: () => $fetch(`/api/folder/${base64urlEncode('C:\\Users\\User\\Documents')}`),
+      onSelect: () => $fetch('/api/folder/open', { params: { path: 'C:\\Users\\User\\Documents' } }),
     },
     {
       label: 'AppData',
       icon: 'i-lucide-folder',
-      onSelect: () => $fetch(`/api/folder/${base64urlEncode('C:\\Users\\User\\AppData')}`),
+      onSelect: () => $fetch('/api/folder/open', { params: { path: 'C:\\Users\\User\\AppData' } }),
     },
     {
       label: 'Rime',
       icon: 'i-lucide-folder',
-      onSelect: () => $fetch(`/api/folder/${base64urlEncode('C:\\Users\\User\\AppData\\Roaming\\Rime')}`),
+      onSelect: () => $fetch('/api/folder/open', { params: { path: 'C:\\Users\\User\\AppData\\Roaming\\Rime' } }),
     },
   ]
 
@@ -61,7 +61,7 @@ export function useCommand() {
     applications.value.map(app => ({
       label: app.name,
       icon: 'i-lucide-app-window',
-      onSelect: () => $fetch(`/api/app/${app.base64url}`),
+      onSelect: () => $fetch('/api/app/open', { params: { id: app.id } }),
     })),
   )
 

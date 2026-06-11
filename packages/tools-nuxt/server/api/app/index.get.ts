@@ -14,6 +14,6 @@ export default defineEventHandler((): Application[] => {
 
   return apps.map(app => ({
     name: app.Name,
-    base64url: base64urlEncode(app.AppID),
+    id: app.AppID,
   }))
 })
