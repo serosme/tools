@@ -2,6 +2,13 @@ import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
 
 export function useCommand() {
   const searchTerm = ref('')
+  const paletteKey = ref(0)
+  function resetPalette() {
+    searchTerm.value = ''
+    nextTick(() => {
+      paletteKey.value++
+    })
+  }
   const router = useRouter()
   const toast = useToast()
   const pages = computed<CommandPaletteItem[]>(() =>
@@ -55,6 +62,42 @@ export function useCommand() {
       label: app.name,
       icon: 'i-lucide-app-window',
       onSelect: () => $fetch(`/api/app/${app.base64url}`),
+    })),
+  )
+
+  const { data: workspaceProjects } = useFetch<WorkspaceProject[]>('/api/workspace', {
+    default: () => [],
+    transform: data => data || [],
+    onRequestError: (err) => {
+      console.error('获取工作区项目失败:', err)
+      toast.add({ title: '获取工作区项目失败', description: String(err), color: 'error', duration: 3000 })
+    },
+    onResponseError: (err) => {
+      console.error('获取工作区项目响应错误:', err)
+      toast.add({ title: '获取工作区项目响应异常', color: 'error', duration: 3000 })
+    },
+  })
+  const projects = computed<CommandPaletteItem[]>(() =>
+    workspaceProjects.value.map(project => ({
+      label: project.name,
+      icon: 'i-lucide-folder',
+      children: [
+        {
+          label: 'Terminal',
+          icon: 'i-lucide-terminal',
+          onSelect: () => $fetch(`/api/workspace/open?path=${encodeURIComponent(project.path)}&type=terminal`),
+        },
+        {
+          label: 'VSCode',
+          icon: 'i-lucide-code',
+          onSelect: () => $fetch(`/api/workspace/open?path=${encodeURIComponent(project.path)}&type=vscode`),
+        },
+        {
+          label: 'IDEA',
+          icon: 'i-lucide-braces',
+          onSelect: () => $fetch(`/api/workspace/open?path=${encodeURIComponent(project.path)}&type=idea`),
+        },
+      ],
     })),
   )
 
@@ -172,6 +215,11 @@ export function useCommand() {
       items: apps.value,
     },
     {
+      id: 'workspace',
+      label: 'Workspace',
+      items: projects.value,
+    },
+    {
       id: 'quicks',
       label: 'Quicks',
       items: quicks.value,
@@ -181,6 +229,8 @@ export function useCommand() {
 
   return {
     searchTerm,
+    paletteKey,
+    resetPalette,
     groups,
     pages,
     commands,
