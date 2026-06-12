@@ -1,13 +1,6 @@
-on:
-  push:
-    branches:
-      - main
-
 name: release
 
-concurrency:
-  group: release
-  cancel-in-progress: true
+on: workflow_dispatch
 
 jobs:
   release:
@@ -54,7 +47,7 @@ jobs:
 
           git tag -l | ForEach-Object { git tag -d $_ 2>$null }
 
-          $tag = git rev-parse --short HEAD
+          $tag = Get-Date -Format "yyyyMMddHHmmss"
           git tag $tag
           git push origin $tag
           if ($LASTEXITCODE -ne 0) {
@@ -72,3 +65,17 @@ jobs:
             Write-Error "Failed to create release"
             exit 1
           }
+
+          $hash = (Get-FileHash -Algorithm SHA256 $archive.FullName).Hash.ToLower()
+
+          $m = "bucket/tools.json"
+          $c = Get-Content $m -Raw
+          $c = $c -replace '"version":\s*"[^"]*"', "`"version`": `"$tag`""
+          $c = $c -replace '"hash":\s*"[^"]*"', "`"hash`": `"$hash`""
+          Set-Content $m $c -NoNewLine
+
+          git config user.name "github-actions[bot]" --local
+          git config user.email "github-actions[bot]@users.noreply.github.com" --local
+          git add $m
+          git commit -m "chore: update scoop manifest to $tag"
+          git push
