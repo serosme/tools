@@ -7,6 +7,9 @@ import { schema } from 'tools-shared'
 const conf = new Conf<StoreSchema>({
   cwd: path.join(os.homedir(), '.config', 'tools'),
   schema,
+  defaults: {
+    mihomo: { path: path.join(os.homedir(), '.config', 'mihomo') },
+  },
 })
 
 export default conf

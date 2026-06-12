@@ -1,28 +1,12 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { settings } from 'tools-shared'
 
-const items: NavigationMenuItem[] = [
-  {
-    label: 'Home',
-    icon: 'i-lucide-house',
-    to: '/setting',
-  },
-  {
-    label: 'Music',
-    icon: 'i-lucide-music',
-    to: '/setting/music',
-  },
-  {
-    label: 'Mihomo',
-    icon: 'i-lucide-shield',
-    to: '/setting/mihomo',
-  },
-  {
-    label: 'Asr',
-    icon: 'i-lucide-mic',
-    to: '/setting/asr',
-  },
-]
+const items: NavigationMenuItem[] = Object.entries(settings).map(([key, section]) => ({
+  label: section.label,
+  icon: section.icon,
+  to: `/setting/${key}`,
+}))
 </script>
 
 <template>
