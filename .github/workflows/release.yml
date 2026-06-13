@@ -8,21 +8,24 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - name: checkout
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
+      - name: setup node
+        uses: actions/setup-node@v6
         with:
           node-version-file: package.json
 
-      - run: npm ci
+      - name: install dependencies
+        run: npm ci
 
-      - run: npm run build
+      - name: build
+        run: npm run build
 
-      - shell: pwsh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: compute hash
+        shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
 
@@ -34,20 +37,44 @@ jobs:
             exit 1
           }
 
-          $releases = gh release list --limit 100 --json tagName | ConvertFrom-Json
-          foreach ($r in $releases) {
-            gh release delete $r.tagName --yes --cleanup-tag 2>$null
-          }
+          $version = Get-Date -Format "yyyyMMddHHmmss"
+          $hash = (Get-FileHash -Algorithm SHA256 $archive.FullName).Hash.ToLower()
 
+          "archive=$($archive.FullName)" >> $env:GITHUB_ENV
+          "version=$version" >> $env:GITHUB_ENV
+          "hash=$hash" >> $env:GITHUB_ENV
+
+      - name: update manifest
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $m = "bucket/tools.json"
+          $c = Get-Content $m -Raw
+          $c = $c -replace '"version":\s*"[^"]*"', "`"version`": `"$env:version`""
+          $c = $c -replace '"hash":\s*"[^"]*"', "`"hash`": `"$env:hash`""
+          Set-Content $m $c -NoNewLine
+
+          git config user.name "github-actions[bot]" --local
+          git config user.email "github-actions[bot]@users.noreply.github.com" --local
+          git add $m
+          git commit -m "chore: update scoop manifest to $env:version"
+          git push
+
+      - name: reset latest tag
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $tag = "latest"
+
+          gh release delete $tag --yes --cleanup-tag 2>$null
           git fetch --tags
-          $remoteTags = git ls-remote --tags origin | ForEach-Object { ($_ -split "\s+")[1] -replace "^refs/tags/", "" }
-          foreach ($tag in $remoteTags) {
-            git push origin --delete $tag 2>$null
-          }
+          git push origin --delete $tag 2>$null
+          git tag -d $tag 2>$null
 
-          git tag -l | ForEach-Object { git tag -d $_ 2>$null }
-
-          $tag = Get-Date -Format "yyyyMMddHHmmss"
           git tag $tag
           git push origin $tag
           if ($LASTEXITCODE -ne 0) {
@@ -55,27 +82,20 @@ jobs:
             exit 1
           }
 
-          gh release create $tag `
-            --title "$tag" `
+      - name: create release
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          gh release create "latest" `
+            --title "latest" `
             --notes "" `
             --repo "${{ github.repository }}" `
-            "$($archive.FullName)"
+            "$env:archive"
 
           if ($LASTEXITCODE -ne 0) {
             Write-Error "Failed to create release"
             exit 1
           }
-
-          $hash = (Get-FileHash -Algorithm SHA256 $archive.FullName).Hash.ToLower()
-
-          $m = "bucket/tools.json"
-          $c = Get-Content $m -Raw
-          $c = $c -replace '"version":\s*"[^"]*"', "`"version`": `"$tag`""
-          $c = $c -replace '"hash":\s*"[^"]*"', "`"hash`": `"$hash`""
-          Set-Content $m $c -NoNewLine
-
-          git config user.name "github-actions[bot]" --local
-          git config user.email "github-actions[bot]@users.noreply.github.com" --local
-          git add $m
-          git commit -m "chore: update scoop manifest to $tag"
-          git push
