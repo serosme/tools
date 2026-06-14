@@ -13,12 +13,12 @@
     "conf": "^15.1.0",
     "nuxt": "^4.4.8",
     "taglib-wasm": "^1.2.2",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.1",
     "vue": "^3.5.38",
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.111",
+    "@iconify-json/lucide": "^1.2.112",
     "@iconify-json/solar": "^1.2.5",
     "tools-shared": "file:../tools-shared"
   }
