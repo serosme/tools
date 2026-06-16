@@ -16,6 +16,7 @@ if (!(sectionKey in settings)) {
 }
 
 const { conf, save } = useConf(sectionKey as keyof StoreSchema)
+provide('sectionConf', conf)
 
 async function onSubmit() {
   await save()
@@ -31,7 +32,6 @@ async function onSubmit() {
   <SettingForm
     v-if="sectionKey in settings"
     :section-key="sectionKey"
-    :conf="conf"
     @submit="onSubmit"
   />
 </template>

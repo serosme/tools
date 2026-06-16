@@ -1,20 +1,24 @@
 <script setup lang="ts">
+import type { SettingSection } from 'tools-shared'
 import { settings } from 'tools-shared'
+import { computed, inject } from 'vue'
 
 const props = defineProps<{
   sectionKey: string
-  conf: Record<string, any>
 }>()
 
 const emit = defineEmits<{
   submit: []
 }>()
 
-const sectionSchema = computed(() => settings[props.sectionKey] ?? null)
+const conf = inject<Record<string, any>>('sectionConf')!
+
+const sectionSchema = computed(() => (settings as Record<string, SettingSection>)[props.sectionKey] ?? null)
 
 const properties = computed(() => {
   const s = sectionSchema.value
-  if (!s) return []
+  if (!s)
+    return []
   return Object.entries(s.properties).map(([name, prop]) => ({
     name,
     schema: prop,
@@ -24,7 +28,7 @@ const properties = computed(() => {
 async function selectFolder(propName: string) {
   const folder = await electron.path.folder.select()
   if (folder) {
-    props.conf[propName] = folder
+    conf[propName] = folder
   }
 }
 </script>
