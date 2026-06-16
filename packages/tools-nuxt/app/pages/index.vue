@@ -10,6 +10,9 @@ const { searchTerm, paletteKey, groups, pages, commands, resetPalette } = useCom
     :fuse="{
       resultLimit: pages.length + commands.length,
       matchAllWhenSearchEmpty: false,
+      fuseOptions: {
+        keys: ['label', 'suffix', 'keywords'],
+      },
     }"
     @keydown.space.prevent
     @update:model-value="resetPalette"

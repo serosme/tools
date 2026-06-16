@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         '@vueuse/core',
+        'pinyin-pro',
       ],
     },
   },

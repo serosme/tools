@@ -1,4 +1,5 @@
 import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
+import { pinyin } from 'pinyin-pro'
 
 export function useCommand() {
   const searchTerm = ref('')
@@ -61,6 +62,12 @@ export function useCommand() {
     applications.value.map(app => ({
       label: app.name,
       icon: 'i-lucide-app-window',
+      keywords: app.name
+        ? [
+            pinyin(app.name, { toneType: 'none', separator: '' }),
+            pinyin(app.name, { pattern: 'first', toneType: 'none', separator: '' }),
+          ]
+        : undefined,
       onSelect: () => $fetch('/api/app/open', { params: { id: app.id } }),
     })),
   )
