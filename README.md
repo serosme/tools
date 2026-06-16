@@ -5,7 +5,7 @@
 添加 bucket
 
 ```shell
-scoop bucket add bucket https://github.com/serosme/scoop-bucket.git
+scoop bucket add bucket https://github.com/serosme/tools.git
 ```
 
 安装 tools
