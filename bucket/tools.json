@@ -1,12 +1,12 @@
 {
   "homepage": "https://github.com/serosme/tools",
-  "version": "20260616014712",
+  "version": "20260619143706",
   "bin": "tools.exe",
   "shortcuts": [["tools.exe", "Tools"]],
   "architecture": {
     "64bit": {
       "url": "https://github.com/serosme/tools/releases/latest/download/tools-win-x64.zip",
-      "hash": "4ff84f7a3cefa4f2e4705f32bf1fc7411f797b830ac5e85d540d69a179d25ba7"
+      "hash": "6194c55726aa6665f9a6f17dd0c5d9342f0402e89ce10c57fed667efc6934ee1"
     }
   }
 }
