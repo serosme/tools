@@ -7,6 +7,7 @@ const { searchTerm, paletteKey, groups, pages, commands, resetPalette } = useCom
     :key="paletteKey"
     v-model:search-term="searchTerm"
     :groups="groups"
+    preserve-group-order
     :fuse="{
       resultLimit: pages.length + commands.length,
       matchAllWhenSearchEmpty: false,
