@@ -82,3 +82,7 @@ app.whenReady().then(async () => {
     record.hide()
   })
 })
+
+app.on('will-quit', () => {
+  uIOhook.stop()
+})

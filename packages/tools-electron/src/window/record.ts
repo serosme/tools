@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, screen } from 'electron'
+import { app, BrowserWindow, screen } from 'electron'
 import { loadURL } from '../utils/window.js'
 
 const RECORD_W = 200
@@ -7,6 +7,11 @@ const RECORD_H = 56
 const BOTTOM_OFFSET = 40
 
 let window: BrowserWindow | null = null
+let isQuitting = false
+
+app.on('before-quit', () => {
+  isQuitting = true
+})
 
 export function useRecordWindow() {
   const create = async () => {
@@ -33,6 +38,8 @@ export function useRecordWindow() {
     await loadURL(window, '/record')
 
     window.on('close', (event) => {
+      if (isQuitting)
+        return
       event.preventDefault()
       window?.hide()
     })
