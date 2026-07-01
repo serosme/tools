@@ -36,5 +36,8 @@
     "win": {
       "target": "zip"
     }
+  },
+  "dependencies": {
+    "uiohook-napi": "^1.5.5"
   }
 }

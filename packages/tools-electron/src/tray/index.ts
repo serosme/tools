@@ -20,3 +20,7 @@ export function createAppTray(
 
   tray.on('click', onTrayClick)
 }
+
+export function setRecordingTooltip(recording: boolean) {
+  tray?.setToolTip(recording ? 'Tools *' : 'Tools')
+}

@@ -23,6 +23,18 @@ const electronAPI: ElectronAPI = {
     create: (path: string) => invoke('window:create', path),
     close: (id: number) => invoke('window:close', id),
   },
+
+  asr: {
+    onCommand: (callback: (_cmd: 'start' | 'stop') => void) => {
+      const handler = (_event: Electron.IpcRendererEvent, cmd: 'start' | 'stop') => callback(cmd)
+      ipcRenderer.on('asr:state', handler)
+      return () => {
+        ipcRenderer.removeListener('asr:state', handler)
+      }
+    },
+    sendResult: (text: string) => invoke('asr:result', text),
+    hide: () => invoke('asr:hide'),
+  },
 }
 
 contextBridge.exposeInMainWorld('electronAPI', electronAPI)

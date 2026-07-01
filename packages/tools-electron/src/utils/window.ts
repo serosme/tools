@@ -22,9 +22,9 @@ export function startRendererProcess() {
   }
 }
 
-export async function loadURL(window: BrowserWindow) {
+export async function loadURL(window: BrowserWindow, path = '') {
   await waitForServer('http://localhost:3000')
-  window.loadURL('http://localhost:3000')
+  window.loadURL(`http://localhost:3000${path}`)
 }
 
 export function toggleDevToolsForFocusedWindow() {
