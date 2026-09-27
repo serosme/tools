@@ -1,0 +1,18 @@
+blockExoticSubdeps: false
+
+minimumReleaseAgeExcludePrune: true
+minimumReleaseAgeExclude:
+  - '@iconify-json/lucide@1.2.137'
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver@6.3.1
+  - semver@5.7.2
+  - undici-types@6.21.0
+
+nodeLinker: hoisted
+shellEmulator: true
+
+allowBuilds:
+  esbuild: true
+  vue-demi: true

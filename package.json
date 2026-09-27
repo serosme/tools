@@ -1,0 +1,42 @@
+{
+  "name": "electron-nuxt",
+  "productName": "electron-nuxt",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "main": "electron/index.ts",
+  "scripts": {
+    "postinstall": "nuxt prepare",
+
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "typecheck": "nuxt typecheck && tsc -p electron/tsconfig.json",
+
+    "nuxt:dev": "nuxt dev --port 2080",
+    "nuxt:build": "nuxt build",
+
+    "electron:dev": "electron-forge start",
+    "electron:build": "electron-forge make",
+
+    "dev": "run-p --race --silent nuxt:dev electron:dev",
+    "build": "run-s --silent nuxt:build electron:build"
+  },
+  "dependencies": {
+    "@iconify-json/lucide": "1.2.137",
+    "@nuxt/ui": "4.11.2",
+    "nuxt": "4.5.2",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "9.5.1",
+    "@electron-forge/cli": "7.11.2",
+    "@electron-forge/maker-zip": "7.11.2",
+    "@tsconfig/node-ts": "23.6.4",
+    "@tsconfig/node24": "24.0.5",
+    "electron": "44.4.5",
+    "eslint": "10.11.0",
+    "npm-run-all2": "9.0.3",
+    "typescript": "6.0.3",
+    "vue-tsc": "3.3.11"
+  }
+}
