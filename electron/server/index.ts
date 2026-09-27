@@ -2,8 +2,9 @@ import process from 'node:process'
 import { app } from 'electron'
 
 // 渲染服务地址
+export const APP_HOST = 'localhost'
 export const APP_PORT = 2080
-export const APP_URL = `http://localhost:${APP_PORT}`
+export const APP_URL = `http://${APP_HOST}:${APP_PORT}`
 
 // 轮询等待渲染服务
 async function waitForServer() {
@@ -21,8 +22,10 @@ async function waitForServer() {
 // 启动渲染服务
 export async function startServer() {
   if (app.isPackaged) {
-    // Nitro 的内置 server 只认 NITRO_PORT
+    // Nitro 的内置 server 只认 NITRO_PORT / NITRO_HOST
     process.env.NITRO_PORT = String(APP_PORT)
+    // 不设 host 时 Nitro 会监听所有网卡
+    process.env.NITRO_HOST = APP_HOST
 
     // @ts-expect-error .output 是构建产物，没有类型声明
     await import('../../.output/server/index.mjs')

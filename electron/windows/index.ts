@@ -10,25 +10,9 @@ app.on('before-quit', () => {
   quitting = true
 })
 
-// 按名字创建窗口，已存在则聚焦，showOnReady 让窗口等页面可渲染再显示
-export async function createWindow(
-  name: string,
-  url: string,
-  options: BrowserWindowConstructorOptions,
-  { showOnReady = false } = {},
-) {
-  // 同名窗口存在则聚焦
-  const existing = windows.get(name)
-  if (existing) {
-    existing.focus()
-    return existing
-  }
-
+// 创建窗口
+export async function createWindow(name: string, url: string, options: BrowserWindowConstructorOptions) {
   const win = new BrowserWindow(options)
-
-  // 避免白屏闪烁
-  if (showOnReady)
-    win.once('ready-to-show', () => win.show())
 
   // 关窗只是隐藏，继续留在托盘
   win.on('close', (event) => {
@@ -48,4 +32,15 @@ export async function createWindow(
 // 获取所有窗口
 export function getWindows() {
   return [...windows.entries()].map(([name, win]) => ({ name, win }))
+}
+
+// 显示或隐藏窗口
+export function toggleWindow(win: BrowserWindow) {
+  if (win.isVisible() && !win.isMinimized()) {
+    win.hide()
+  }
+  else {
+    win.show()
+    win.focus()
+  }
 }

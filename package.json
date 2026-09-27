@@ -1,6 +1,6 @@
 {
-  "name": "electron-nuxt",
-  "productName": "electron-nuxt",
+  "name": "tools",
+  "productName": "Tools",
   "type": "module",
   "version": "0.0.0",
   "private": true,
@@ -25,6 +25,7 @@
     "@iconify-json/lucide": "1.2.137",
     "@nuxt/ui": "4.11.2",
     "nuxt": "4.5.2",
+    "pinyin-pro": "3.29.4",
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {

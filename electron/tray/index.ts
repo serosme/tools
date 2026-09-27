@@ -27,9 +27,8 @@ function windowMenu(win: BrowserWindow): MenuItemConstructorOptions[] {
         win.focus()
       },
     },
-    { label: '隐藏', click: () => win.hide() },
-    { type: 'separator' },
     { label: '开发', click: () => win.webContents.toggleDevTools() },
+    { type: 'separator' },
     // 使用 destroy 来真正关掉窗口
     { label: '关闭', click: () => win.destroy() },
   ]
