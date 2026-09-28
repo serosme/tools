@@ -1,4 +1,4 @@
 export default defineEventHandler((event) => {
-  const { command } = getQuery(event) as { command: string }
-  openShell(command)
+  const { name } = getQuery(event) as { name: string }
+  openShell(getShellCommand(name))
 })

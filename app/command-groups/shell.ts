@@ -1,19 +1,12 @@
 import type { CommandPaletteItem } from '@nuxt/ui'
 
-const commands = [
-  { label: 'Deepseek Harness', icon: 'i-lucide-sparkles', command: 'dsh web' },
-  { label: 'Update Scoop', icon: 'i-lucide-app-window', command: 'scoop update; scoop update *; scoop cleanup *' },
-  { label: 'Update Mise', icon: 'i-lucide-code', command: 'mise upgrade; mise prune' },
-  { label: 'Update Npm', icon: 'i-lucide-package', command: 'npm update -g' },
-  { label: 'Update Winget', icon: 'i-lucide-monitor', command: 'winget update --all' },
-]
-
 export default function () {
+  const { data } = useSelfFetch<{ name: string }[]>('/api/command/shell', { default: () => [] })
   const items = computed<CommandPaletteItem[]>(() =>
-    commands.map(({ label, icon, command }) => ({
-      label,
-      icon,
-      onSelect: () => selfFetch('/api/command/shell/open', { params: { command } }),
+    data.value.map(shell => ({
+      label: shell.name,
+      icon: 'i-lucide-terminal',
+      onSelect: () => selfFetch('/api/command/shell/open', { params: { name: shell.name } }),
     })),
   )
   return { id: 'shell', label: 'Shell', order: 2, items }
