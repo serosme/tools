@@ -2,10 +2,10 @@ import { Buffer } from 'node:buffer'
 
 const shellCommands: Record<string, string> = {
   'Deepseek Harness': 'dsh web',
-  'Update Scoop': 'scoop update; scoop update *; scoop cleanup *',
-  'Update Mise': 'mise upgrade; mise prune',
-  'Update Npm': 'npm update -g',
-  'Update Winget': 'winget update --all',
+  'Scoop': 'scoop update; scoop update *; scoop cleanup *',
+  'Mise': 'mise upgrade; mise prune',
+  'Npm': 'ncu -g',
+  'Winget': 'winget update --all',
 }
 
 export function getShellNames(): { name: string }[] {
