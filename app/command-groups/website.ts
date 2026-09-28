@@ -17,5 +17,5 @@ export default function () {
       }),
     })),
   )
-  return { id: 'websites', label: 'Websites', order: 1, items }
+  return { id: 'website', label: 'Website', order: 1, items }
 }

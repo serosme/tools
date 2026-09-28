@@ -9,5 +9,5 @@ export default function () {
       onSelect: () => selfFetch('/api/command/folder/open', { params: { name: folder.name } }),
     })),
   )
-  return { id: 'folders', label: 'Folders', items }
+  return { id: 'folder', label: 'Folder', items }
 }
