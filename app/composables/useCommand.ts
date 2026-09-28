@@ -37,7 +37,7 @@ export function useCommand() {
 
   const resultLimit = computed(() =>
     groups.value
-      .filter(group => group.id === 'shell')
+      .filter(group => group.id === 'websites' || group.id === 'shell')
       .reduce((total, group) => total + (group.items?.length ?? 0), 0),
   )
 

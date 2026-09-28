@@ -12,6 +12,14 @@ app.on('before-quit', () => {
 
 // 创建窗口
 export async function createWindow(name: string, url: string, options: BrowserWindowConstructorOptions) {
+  // 同名窗口存在时不重新创建
+  const existing = windows.get(name)
+  if (existing) {
+    existing.show()
+    existing.focus()
+    return existing
+  }
+
   const win = new BrowserWindow(options)
 
   // 关窗只是隐藏，继续留在托盘

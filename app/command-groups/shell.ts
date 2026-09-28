@@ -16,5 +16,5 @@ export default function () {
       onSelect: () => selfFetch('/api/command/shell/open', { params: { command } }),
     })),
   )
-  return { id: 'shell', label: 'Shell', order: 1, items }
+  return { id: 'shell', label: 'Shell', order: 2, items }
 }
