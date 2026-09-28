@@ -7,6 +7,15 @@ export default defineNuxtConfig({
     fonts: false,
   },
 
+  icon: {
+    provider: 'none',
+    clientBundle: {
+      scan: {
+        globInclude: ['**/*.{vue,jsx,tsx,ts,md,mdc,mdx,yml,yaml}'],
+      },
+    },
+  },
+
   css: ['~/assets/css/main.css'],
 
   modules: ['@nuxt/ui'],
