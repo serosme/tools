@@ -1,8 +1,7 @@
 {
   "name": "tools",
-  "productName": "Tools",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "main": "electron/index.ts",
   "scripts": {
