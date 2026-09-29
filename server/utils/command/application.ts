@@ -1,17 +1,14 @@
-import { execSync } from 'node:child_process'
-
 interface ApplicationItem {
   name: string
   id: string
 }
 
+const getStartApps = '[Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8; Get-StartApps | ConvertTo-Json'
+
 let lastApplications: ApplicationItem[]
 
 function getAllApplications(): ApplicationItem[] {
-  const stdout = execSync(
-    'powershell -NoProfile -command "[Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8; Get-StartApps | ConvertTo-Json"',
-    { maxBuffer: 1 * 1024 * 1024 },
-  ).toString()
+  const { stdout } = spawnProcessSync('powershell', ['-NoProfile', '-command', getStartApps])
 
   const applications = JSON.parse(stdout) as Array<{ Name: string, AppID: string }>
 

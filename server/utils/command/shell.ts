@@ -17,7 +17,7 @@ export function getShellCommand(name: string): string {
 }
 
 export function openShell(command: string): void {
-  openProcess('wt.exe', ['powershell', '-NoExit', '-EncodedCommand', toEncodedCommand(command)])
+  spawnProcess('wt.exe', ['powershell', '-NoExit', '-EncodedCommand', toEncodedCommand(command)])
 }
 
 function toEncodedCommand(command: string): string {
