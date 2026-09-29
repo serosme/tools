@@ -1,9 +1,6 @@
 import type { CommandPaletteItem } from '@nuxt/ui'
 import { Buffer } from 'node:buffer'
 
-const mihomoDir = 'C:\\Users\\User\\.config\\mihomo'
-const mihomoExe = `${mihomoDir}\\mihomo.exe`
-
 const shellTree: CommandPaletteItem[] = [
   {
     label: 'Deepseek Harness',
@@ -84,26 +81,4 @@ function openTerminal(command: string): void {
 
 function toEncodedCommand(command: string): string {
   return Buffer.from(command, 'utf16le').toString('base64')
-}
-
-function startMihomo(tun: boolean): void {
-  if (isMihomoRunning())
-    return
-
-  spawnProcess(mihomoExe, ['-d', mihomoDir], { elevate: tun })
-}
-
-function stopMihomo(): void {
-  if (!isMihomoRunning())
-    return
-
-  if (spawnProcessSync('taskkill', ['/F', '/IM', 'mihomo.exe']).status === 0)
-    return
-
-  spawnProcess('taskkill', ['/F', '/IM', 'mihomo.exe'], { elevate: true })
-}
-
-function isMihomoRunning(): boolean {
-  const { stdout } = spawnProcessSync('tasklist', ['/NH', '/FO', 'CSV', '/FI', 'IMAGENAME eq mihomo.exe'])
-  return stdout.includes('mihomo.exe')
 }
