@@ -4,12 +4,33 @@ import { Buffer } from 'node:buffer'
 const shellTree: CommandPaletteItem[] = [
   {
     label: 'Deepseek Harness',
-    icon: 'i-lucide-sparkles',
+    icon: 'i-lucide-atom',
     action: () => openTerminal('dsh web'),
   },
   {
-    label: '更新',
-    icon: 'i-lucide-refresh-cw',
+    label: 'Mihomo',
+    icon: 'i-lucide-shield',
+    children: [
+      {
+        label: 'TUN 开启',
+        icon: 'i-lucide-shield',
+        action: () => startMihomo(true),
+      },
+      {
+        label: '开启',
+        icon: 'i-lucide-play',
+        action: () => startMihomo(false),
+      },
+      {
+        label: '关闭',
+        icon: 'i-lucide-square',
+        action: stopMihomo,
+      },
+    ],
+  },
+  {
+    label: 'Update',
+    icon: 'i-lucide-arrow-up',
     children: [
       {
         label: 'Scoop',
@@ -30,27 +51,6 @@ const shellTree: CommandPaletteItem[] = [
         label: 'Winget',
         icon: 'i-lucide-monitor',
         action: () => openTerminal('winget update --all'),
-      },
-    ],
-  },
-  {
-    label: 'Mihomo',
-    icon: 'i-lucide-shield',
-    children: [
-      {
-        label: '开启',
-        icon: 'i-lucide-play',
-        action: () => startMihomo(false),
-      },
-      {
-        label: 'TUN 开启',
-        icon: 'i-lucide-shield',
-        action: () => startMihomo(true),
-      },
-      {
-        label: '关闭',
-        icon: 'i-lucide-square',
-        action: stopMihomo,
       },
     ],
   },
