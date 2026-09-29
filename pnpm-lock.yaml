@@ -14,15 +14,24 @@ importers:
       '@nuxt/ui':
         specifier: 4.11.2
         version: 4.11.2(4fb509cc5ee1ab5480982db40eb095c7)
+      decibri:
+        specifier: 5.7.0
+        version: 5.7.0
       nuxt:
         specifier: 4.5.2
         version: 4.5.2(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@oxc-project/types@0.151.0)(@types/node@26.6.2)(@vue/compiler-sfc@3.5.43)(db0@0.3.4)(encoding@0.1.13)(esbuild@0.28.2)(eslint@10.11.0(jiti@2.7.0))(ioredis@5.11.1)(lightningcss@1.33.0)(magicast@0.5.5)(optionator@0.9.4)(rolldown@1.2.10)(rollup-plugin-visualizer@7.1.1(rolldown@1.2.10)(rollup@4.63.4))(rollup@4.63.4)(srvx@0.11.22)(terser@5.51.2)(typescript@6.0.3)(vite@8.3.0(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))(vue-tsc@3.3.11(typescript@6.0.3))(webpack@5.111.1(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28))(yaml@2.9.1)
       pinyin-pro:
         specifier: 3.29.4
         version: 3.29.4
+      smol-toml:
+        specifier: 1.9.0
+        version: 1.9.0
       tailwindcss:
         specifier: 4.3.3
         version: 4.3.3
+      uiohook-napi:
+        specifier: 1.5.5
+        version: 1.5.5
     devDependencies:
       '@antfu/eslint-config':
         specifier: 9.5.1
@@ -291,6 +300,31 @@ packages:
   '@colordx/core@5.8.0':
     resolution: {integrity: sha512-cG0QJAO6VkaRUlIb0zOzX9gfJgs1pjoOL9gZ/PK1kfvBs0GCkADu5oQh6gPxXgQnZ3gV575h+lQRC0NlMDTclA==}
 
+  '@decibri/decibri-darwin-arm64@5.7.0':
+    resolution: {integrity: sha512-RkU5JXH3+ijxGtynnVECo3wtFWqzGKmCqw5e1Tn3Y6Y1njDmiz/r1xNotf6Iq43nJu+czDUTcOh6o2ZNVJvWyg==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@decibri/decibri-linux-arm64-gnu@5.7.0':
+    resolution: {integrity: sha512-9D8JLtl041mhGqqvrGiKMLq+Dxu+wKJ+8vFc32bESLkZUxCbtfHgSiMcyMdojYRab6NpbL7aK7mebad2WltHvw==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@decibri/decibri-linux-x64-gnu@5.7.0':
+    resolution: {integrity: sha512-H0TpHaM2k8cG4Gy+JTw8Mb5HOWpw8YYhPEOxelcsXBdNeReGUudHZArAelwhoEJP/WOaqKkLiZoQT5Kn2r4VlA==}
+    cpu: [x64]
+    os: [linux]
+
+  '@decibri/decibri-win32-arm64-msvc@5.7.0':
+    resolution: {integrity: sha512-jO0v5M2z17jrlubHYdddAzZIQ7S0TT5jCeY0+a3PAfbPynpY5D74qFilVxa7oRMzvldMzXnpYNP1q7zB+8yWCQ==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@decibri/decibri-win32-x64-msvc@5.7.0':
+    resolution: {integrity: sha512-msAY4Ig2V19LdNFul1iD/p0NVXJWjEM7dF/6psh6BfNTz3pQKPB2yJatZR2p/MpggEBDY+P9bqm3eyg2upwVtw==}
+    cpu: [x64]
+    os: [win32]
+
   '@dxup/nuxt@0.5.10':
     resolution: {integrity: sha512-54Vehb7LmR7qYpC6KFwjDTSm6CB1CayBu+JXdHrPLrIjjr5xAgb43jvgOU+mnB+tsRh414fSsEy0QjBMKILQ8g==}
 
@@ -382,8 +416,8 @@ packages:
     resolution: {integrity: sha512-3kSBtG8ObcTVfXanm5vVJ6UnBLEVmVsRk1M+vGqCuMBV+XLCbJYuWQful+yIy0GQDsSlK0kHEriEHn7SPk4EnA==}
     engines: {node: '>=22.12.0'}
 
-  '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2}
+  '@electron/node-gyp@git+ssh://git@github.com/electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2':
+    resolution: {commit: 06b29aafb7708acef8b3669835c8a7857ebc92d2, repo: git@github.com:electron/node-gyp.git, type: git}
     version: 10.2.0-electron.1
     engines: {node: '>=12.13.0'}
     hasBin: true
@@ -2920,6 +2954,12 @@ packages:
     peerDependenciesMeta:
       supports-color:
         optional: true
+
+  decibri@5.7.0:
+    resolution: {integrity: sha512-M2LoVPG6uEufk5x1oaFDP1ml/r04nTmgzZ1TKJrb2tCva8tkDLtWoujT9Nt5g2rXk3/52Ekymmp2aFs3lyco4Q==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64, arm64]
+    os: [win32, darwin, linux]
 
   decode-named-character-reference@1.3.0:
     resolution: {integrity: sha512-GtpQYB283KrPp6nRw50q3U9/VfOutZOe103qlN7BPP6Ad27xYnOIWv4lPzo8HCAL+mMZofJ9KEy30fq6MfaK6Q==}
@@ -5754,6 +5794,10 @@ packages:
     resolution: {integrity: sha512-RQsvleCbF8cVHEv+xuDGaA4pOizFqJ0GgjtMSRo6oP8pnN7WsigHgVGey6aILRBKv4W2YOMHLqbKdnB6hpB9fw==}
     engines: {node: '>=20.0.0'}
 
+  smol-toml@1.9.0:
+    resolution: {integrity: sha512-hpd+HLON7HdZXqYchMM/+LaTTbdK0AU3NngIJ4KVyWbY9bfQqdL9cD+4yf6dUoU2Ap4VsU0JkQi6FxAI1B2mXQ==}
+    engines: {node: '>= 18'}
+
   socks-proxy-agent@7.0.0:
     resolution: {integrity: sha512-Fgl0YPZ902wEsAyiQ+idGd1A7rSFx/ayC1CQVMw5P+EQx2V0SgpGtf6OKFhVjPflPUl9YMmEOnmfjCdMUsygww==}
     engines: {node: '>= 10'}
@@ -6066,6 +6110,10 @@ packages:
 
   ufo@1.6.4:
     resolution: {integrity: sha512-JFNbkD1Svwe0KvGi8GOeLcP4kAWQ609twvCdcHxq1oSL8svv39ZuSvajcD8B+5D0eL4+s1Is2D/O6KN3qcTeRA==}
+
+  uiohook-napi@1.5.5:
+    resolution: {integrity: sha512-oSlTdnECw2GBfsJPTbBQBeE4v/EXP0EZmX6BJq5nzH/JgFaBE8JpFwEA/kLhiEP7HxQw28FViWiYgdIZzWuuJQ==}
+    engines: {node: '>= 16'}
 
   ultrahtml@1.7.0:
     resolution: {integrity: sha512-2xRd0VHoAQE4M+vF/DvFFB7pUV0ZxTW1TLi7lHQWnF/Sb5TPeEUV/l+hxcNnGO00ZXGnR0voCMmYRKQf+rvJ2g==}
@@ -6960,6 +7008,21 @@ snapshots:
 
   '@colordx/core@5.8.0': {}
 
+  '@decibri/decibri-darwin-arm64@5.7.0':
+    optional: true
+
+  '@decibri/decibri-linux-arm64-gnu@5.7.0':
+    optional: true
+
+  '@decibri/decibri-linux-x64-gnu@5.7.0':
+    optional: true
+
+  '@decibri/decibri-win32-arm64-msvc@5.7.0':
+    optional: true
+
+  '@decibri/decibri-win32-x64-msvc@5.7.0':
+    optional: true
+
   '@dxup/nuxt@0.5.10(esbuild@0.28.2)(magicast@0.5.5)(rolldown@1.2.10)(rollup@4.63.4)(vite@8.3.0(@types/node@26.6.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))(webpack@5.111.1(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28))':
     dependencies:
       '@dxup/unimport': 0.1.2
@@ -7257,7 +7320,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
+  '@electron/node-gyp@git+ssh://git@github.com/electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2':
     dependencies:
       env-paths: 2.2.1
       exponential-backoff: 3.1.3
@@ -7320,7 +7383,7 @@ snapshots:
 
   '@electron/rebuild@3.7.2':
     dependencies:
-      '@electron/node-gyp': https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2
+      '@electron/node-gyp': git+ssh://git@github.com/electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2
       '@malept/cross-spawn-promise': 2.0.0
       chalk: 4.1.2
       debug: 4.4.3
@@ -10113,6 +10176,14 @@ snapshots:
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+
+  decibri@5.7.0:
+    optionalDependencies:
+      '@decibri/decibri-darwin-arm64': 5.7.0
+      '@decibri/decibri-linux-arm64-gnu': 5.7.0
+      '@decibri/decibri-linux-x64-gnu': 5.7.0
+      '@decibri/decibri-win32-arm64-msvc': 5.7.0
+      '@decibri/decibri-win32-x64-msvc': 5.7.0
 
   decode-named-character-reference@1.3.0:
     dependencies:
@@ -13458,6 +13529,8 @@ snapshots:
 
   smob@1.6.2: {}
 
+  smol-toml@1.9.0: {}
+
   socks-proxy-agent@7.0.0:
     dependencies:
       agent-base: 6.0.2
@@ -13763,6 +13836,10 @@ snapshots:
   typescript@6.0.3: {}
 
   ufo@1.6.4: {}
+
+  uiohook-napi@1.5.5:
+    dependencies:
+      node-gyp-build: 4.8.4
 
   ultrahtml@1.7.0: {}
 

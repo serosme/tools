@@ -1,4 +1,5 @@
 import { app, globalShortcut } from 'electron'
+import { startAsr } from './asr/index.ts'
 import { registerIpcHandlers } from './ipc/index.ts'
 import { startServer } from './server/index.ts'
 import { createTray } from './tray/index.ts'
@@ -14,6 +15,9 @@ app.whenReady().then(async () => {
 
   // 注册 IPC
   registerIpcHandlers()
+
+  // 启动 ASR
+  startAsr()
 
   // 创建命令面板窗口
   const commandWindow = await createCommandWindow()

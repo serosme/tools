@@ -15,4 +15,5 @@ shellEmulator: true
 
 allowBuilds:
   esbuild: true
+  uiohook-napi: true
   vue-demi: true

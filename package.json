@@ -7,26 +7,25 @@
   "main": "electron/index.ts",
   "scripts": {
     "postinstall": "nuxt prepare",
-
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "nuxt typecheck && tsc -p electron/tsconfig.json",
-
     "nuxt:dev": "nuxt dev --port 2080",
     "nuxt:build": "nuxt build",
-
     "electron:dev": "electron-forge start",
     "electron:build": "electron-forge make",
-
     "dev": "run-p --race --silent nuxt:dev electron:dev",
     "build": "run-s --silent nuxt:build electron:build"
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.137",
     "@nuxt/ui": "4.11.2",
+    "decibri": "5.7.0",
     "nuxt": "4.5.2",
     "pinyin-pro": "3.29.4",
-    "tailwindcss": "4.3.3"
+    "smol-toml": "1.9.0",
+    "tailwindcss": "4.3.3",
+    "uiohook-napi": "1.5.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "9.5.1",
