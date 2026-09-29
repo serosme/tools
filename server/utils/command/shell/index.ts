@@ -3,11 +3,6 @@ import { Buffer } from 'node:buffer'
 
 const shellTree: CommandPaletteItem[] = [
   {
-    label: 'Deepseek Harness',
-    icon: 'i-lucide-atom',
-    action: () => openTerminal('dsh web'),
-  },
-  {
     label: 'Clash',
     icon: 'i-lucide-shield',
     children: [
