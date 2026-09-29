@@ -8,23 +8,23 @@ const shellTree: CommandPaletteItem[] = [
     action: () => openTerminal('dsh web'),
   },
   {
-    label: 'Mihomo',
+    label: 'Clash',
     icon: 'i-lucide-shield',
     children: [
       {
         label: 'TUN 开启',
         icon: 'i-lucide-shield',
-        action: () => startMihomo(true),
+        action: () => startClash(true),
       },
       {
         label: '开启',
         icon: 'i-lucide-play',
-        action: () => startMihomo(false),
+        action: () => startClash(false),
       },
       {
         label: '关闭',
         icon: 'i-lucide-square',
-        action: stopMihomo,
+        action: stopClash,
       },
     ],
   },
