@@ -1,3 +1,3 @@
-export default defineEventHandler((): { name: string }[] => {
-  return getShellNames()
+export default defineEventHandler(() => {
+  return getShellTree()
 })
