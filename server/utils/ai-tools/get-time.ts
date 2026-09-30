@@ -2,7 +2,7 @@ import { tool } from 'ai'
 import { z } from 'zod'
 
 export const getTime = tool({
-  description: '获取当前的日期和时间。',
+  description: 'Get the current date and time.',
   inputSchema: z.object({}),
   execute: async () => {
     const now = new Date()

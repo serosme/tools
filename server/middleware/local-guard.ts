@@ -8,5 +8,5 @@ export default defineEventHandler((event) => {
 
   const local = host === 'localhost' || host === '127.0.0.1' || host === '[::1]'
   if (!local || (origin && origin !== 'same-origin'))
-    throw createError({ statusCode: 400, message: '非法来源' })
+    throw createError({ statusCode: 400, message: 'Invalid origin' })
 })

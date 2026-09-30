@@ -109,7 +109,6 @@ function onSubmit() {
               variant="ghost"
               size="sm"
               square
-              aria-label="新建对话"
               :disabled="!messages.length"
               @click="onNewChat"
             />

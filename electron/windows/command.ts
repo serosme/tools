@@ -5,7 +5,7 @@ import { createWindow } from './index.ts'
 const preloadPath = fileURLToPath(new URL('../preload.cjs', import.meta.url))
 
 export function createCommandWindow() {
-  return createWindow('Command Palette', `${APP_URL}/command`, {
+  return createWindow('Command', `${APP_URL}/command`, {
     width: 1280,
     height: 720,
     show: false,

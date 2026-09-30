@@ -7,17 +7,17 @@ const shellTree: CommandPaletteItem[] = [
     icon: 'i-lucide-shield',
     children: [
       {
-        label: 'TUN 开启',
+        label: 'TUN On',
         icon: 'i-lucide-shield',
         action: () => startClash(true),
       },
       {
-        label: '开启',
+        label: 'Start',
         icon: 'i-lucide-play',
         action: () => startClash(false),
       },
       {
-        label: '关闭',
+        label: 'Stop',
         icon: 'i-lucide-square',
         action: stopClash,
       },

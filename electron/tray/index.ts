@@ -21,16 +21,16 @@ export function createTray() {
 function windowMenu(win: BrowserWindow): MenuItemConstructorOptions[] {
   return [
     {
-      label: '显示',
+      label: 'Show',
       click: () => {
         win.show()
         win.focus()
       },
     },
-    { label: '开发', click: () => win.webContents.toggleDevTools() },
+    { label: 'DevTools', click: () => win.webContents.toggleDevTools() },
     { type: 'separator' },
     // 使用 destroy 来真正关掉窗口
-    { label: '关闭', click: () => win.destroy() },
+    { label: 'Close', click: () => win.destroy() },
   ]
 }
 
@@ -39,6 +39,6 @@ function refresh() {
   tray.setContextMenu(Menu.buildFromTemplate([
     ...getWindows().map(({ name, win }) => ({ label: name, submenu: windowMenu(win) })),
     { type: 'separator' },
-    { label: '退出', click: () => app.quit() },
+    { label: 'Quit', click: () => app.quit() },
   ]))
 }
