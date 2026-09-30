@@ -2,7 +2,12 @@ blockExoticSubdeps: false
 
 minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
-  - '@iconify-json/lucide@1.2.137'
+  - '@ai-sdk/gateway@4.0.101'
+  - '@ai-sdk/openai-compatible@3.0.60'
+  - '@ai-sdk/provider-utils@5.0.52'
+  - '@ai-sdk/provider@4.0.20'
+  - '@ai-sdk/vue@4.0.123'
+  - ai@7.0.123
 
 trustPolicy: no-downgrade
 trustPolicyExclude:

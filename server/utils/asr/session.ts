@@ -20,7 +20,7 @@ export function stopAsr(): void {
 }
 
 export async function transcribe(pcm: Buffer): Promise<string> {
-  return requestAsr(pcmToWav(pcm), conf.asr.key)
+  return requestAsr(pcmToWav(pcm), readConf().asr.key)
 }
 
 async function begin(): Promise<void> {

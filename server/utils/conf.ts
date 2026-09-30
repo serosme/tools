@@ -4,11 +4,17 @@ import { join } from 'node:path'
 import { parse } from 'smol-toml'
 
 export interface AppConf {
-  asr: {
-    key: string
+  asr: { key: string }
+  chat: {
+    baseUrl: string
+    apiKey: string
+    defaultModel?: string
+    modelKeywords?: string[]
   }
 }
 
 const confPath = join(homedir(), '.config', 'tools', 'config.toml')
 
-export const conf = parse(readFileSync(confPath, 'utf-8')) as unknown as AppConf
+export function readConf(): AppConf {
+  return parse(readFileSync(confPath, 'utf-8')) as unknown as AppConf
+}
