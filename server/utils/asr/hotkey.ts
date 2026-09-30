@@ -16,6 +16,10 @@ export function startHotkey(next: HotkeyHandlers): void {
   uIOhook.start()
 }
 
+export function stopHotkey(): void {
+  uIOhook.stop()
+}
+
 export function paste(): void {
   uIOhook.keyTap(UiohookKey.V, [UiohookKey.Ctrl])
 }

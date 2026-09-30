@@ -1,11 +1,15 @@
 import { Buffer } from 'node:buffer'
 
-// 与 electron/asr/recorder.ts 的录音参数对应，两边必须同时改，否则 WAV 头与实际音频不符
-const channels = 1
-const sampleRate = 16000
-const bitsPerSample = 16
+export const asrFormat = {
+  sampleRate: 16000,
+  channels: 1,
+  bitsPerSample: 16,
+  dtype: 'int16',
+  framesPerBuffer: 1600,
+} as const
 
 export function pcmToWav(pcm: Buffer): Buffer {
+  const { sampleRate, channels, bitsPerSample } = asrFormat
   const blockAlign = channels * bitsPerSample / 8
   const wav = Buffer.alloc(44 + pcm.length)
 

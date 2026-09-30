@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.137",
+    "@napi-rs/clipboard": "1.1.4",
     "@nuxt/ui": "4.11.2",
     "decibri": "5.7.0",
     "nuxt": "4.5.2",
