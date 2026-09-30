@@ -1,6 +1,14 @@
 import type { ForgeConfig } from '@electron-forge/shared-types'
 
 const config: ForgeConfig = {
+  packagerConfig: {
+    prune: false,
+    ignore: [
+      /^\/node_modules($|\/)/,
+      /^\/\.nuxt($|\/)/,
+    ],
+  },
+
   rebuildConfig: {
     ignoreModules: ['uiohook-napi'],
   },
