@@ -6,9 +6,6 @@ import { createCommandWindow } from './windows/command.ts'
 import { toggleWindow } from './windows/index.ts'
 
 app.whenReady().then(async () => {
-  // 创建常驻托盘
-  createTray()
-
   // 启动渲染服务
   await startServer()
 
@@ -23,4 +20,7 @@ app.whenReady().then(async () => {
 
   // Alt+Space 唤出命令面板
   globalShortcut.register('Alt+Space', () => toggleWindow(commandWindow))
+
+  // 创建常驻托盘
+  createTray()
 })
