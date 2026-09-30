@@ -9,10 +9,6 @@ export function registerIpcHandlers() {
       width: 1440,
       height: 900,
       titleBarStyle: 'hidden',
-      titleBarOverlay: {
-        color: '#FFFFFF',
-        symbolColor: '#000000',
-      },
       webPreferences: {
         contextIsolation: true,
         nodeIntegration: false,
