@@ -7,6 +7,11 @@ const websites: CommandPaletteItem[] = [
     path: '/chat',
   },
   {
+    label: 'Music',
+    icon: 'i-lucide-music',
+    path: '/music',
+  },
+  {
     label: 'Welcome',
     icon: 'i-lucide-house',
     path: '/',

@@ -5,6 +5,7 @@ import { parse } from 'smol-toml'
 
 export interface AppConf {
   asr: { key: string }
+  music: { path: string }
   chat: {
     baseUrl: string
     apiKey: string
