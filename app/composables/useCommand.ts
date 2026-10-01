@@ -5,6 +5,7 @@ type CommandGroupFactory = () => {
   id: string
   label: string
   order?: number
+  countItems?: boolean
   items: ComputedRef<CommandPaletteItem[]>
 }
 
@@ -36,9 +37,9 @@ export function useCommand() {
   )
 
   const resultLimit = computed(() =>
-    groups.value
-      .filter(group => group.id === 'website' || group.id === 'shell')
-      .reduce((total, group) => total + (group.items?.length ?? 0), 0),
+    setups
+      .filter(setup => setup.countItems)
+      .reduce((total, setup) => total + (setup.items.value?.length ?? 0), 0),
   )
 
   return {

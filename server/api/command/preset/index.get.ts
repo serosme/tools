@@ -1,3 +1,3 @@
 export default defineEventHandler(() => {
-  return getShellTree()
+  return getPresetTree()
 })

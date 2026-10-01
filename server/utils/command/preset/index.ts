@@ -1,7 +1,7 @@
 import type { CommandPaletteItem } from '@nuxt/ui'
 import { Buffer } from 'node:buffer'
 
-const shellTree: CommandPaletteItem[] = [
+const presetTree: CommandPaletteItem[] = [
   {
     label: 'Clash',
     icon: 'i-lucide-shield',
@@ -51,20 +51,20 @@ const shellTree: CommandPaletteItem[] = [
   },
 ]
 
-export function getShellTree() {
-  return shellTree
+export function getPresetTree() {
+  return presetTree
 }
 
-export function openShell(label: string): void {
-  findShellAction(shellTree, label)?.()
+export function runPreset(label: string): void {
+  findPresetAction(presetTree, label)?.()
 }
 
-function findShellAction(entries: CommandPaletteItem[], label: string): (() => void) | undefined {
+function findPresetAction(entries: CommandPaletteItem[], label: string): (() => void) | undefined {
   for (const entry of entries) {
     if (entry.label === label)
       return entry.action as (() => void) | undefined
 
-    const found = entry.children && findShellAction(entry.children, label)
+    const found = entry.children && findPresetAction(entry.children, label)
     if (found)
       return found
   }

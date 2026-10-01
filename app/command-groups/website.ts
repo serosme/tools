@@ -10,6 +10,7 @@ export default function () {
     id: 'website',
     label: 'Website',
     order: 1,
+    countItems: true,
     items,
   }
 }
