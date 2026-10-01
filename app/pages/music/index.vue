@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { ContextMenuItem, TableColumn, TableRow } from '@nuxt/ui'
 
+useHead({ title: 'Music' })
+
 const edit = ref({ open: false, id: '' })
 const contextId = ref('')
 const toast = useToast()

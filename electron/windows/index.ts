@@ -20,7 +20,7 @@ export async function createWindow(name: string, url: string, options: BrowserWi
     return existing
   }
 
-  const win = new BrowserWindow(options)
+  const win = new BrowserWindow({ title: name, ...options })
 
   // 关窗只是隐藏，继续留在托盘
   win.on('close', (event) => {

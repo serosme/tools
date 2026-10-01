@@ -3,6 +3,8 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { DefaultChatTransport, getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart } from 'ai'
 
+useHead({ title: 'Chat' })
+
 const { data: models } = await useSelfFetch('/api/chat/models', { default: () => [] })
 
 const input = ref('')
