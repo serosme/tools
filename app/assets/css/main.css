@@ -7,3 +7,15 @@
     cursor: pointer;
   }
 }
+
+@layer overrides {
+  :focus-visible,
+  :focus-visible::before,
+  :focus-visible::after {
+    outline: none;
+  }
+
+  :has(:focus-visible) {
+    outline-style: none;
+  }
+}
