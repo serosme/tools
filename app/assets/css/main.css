@@ -6,6 +6,10 @@
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
+
+  tr[data-selectable='true'] {
+    cursor: pointer;
+  }
 }
 
 @layer overrides {
