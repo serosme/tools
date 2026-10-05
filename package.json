@@ -12,7 +12,7 @@
     "typecheck": "nuxt typecheck && tsc -p electron/tsconfig.json",
     "nuxt:dev": "nuxt dev --port 2080",
     "nuxt:build": "nuxt build",
-    "electron:dev": "electron-forge start",
+    "electron:dev": "CI=1 electron-forge start",
     "electron:build": "electron-forge make",
     "dev": "run-p --race --silent nuxt:dev electron:dev",
     "build": "run-s --silent nuxt:build electron:build"
