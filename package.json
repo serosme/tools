@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@12.8.1",
+  "packageManager": "pnpm@12.9.1",
   "main": "electron/index.ts",
   "scripts": {
     "postinstall": "nuxt prepare",
@@ -18,33 +18,33 @@
     "build": "run-s --silent nuxt:build electron:build"
   },
   "dependencies": {
-    "@ai-sdk/openai-compatible": "3.0.60",
-    "@ai-sdk/vue": "4.0.123",
+    "@ai-sdk/openai-compatible": "3.0.63",
+    "@ai-sdk/vue": "4.0.128",
     "@comark/nuxt": "0.7.0",
-    "@iconify-json/lucide": "1.2.137",
+    "@iconify-json/lucide": "1.2.140",
     "@napi-rs/clipboard": "1.1.4",
-    "@nuxt/ui": "4.11.2",
-    "@vueuse/core": "14.4.0",
-    "ai": "7.0.123",
-    "decibri": "5.7.0",
+    "@nuxt/ui": "4.11.3",
+    "@vueuse/core": "15.0.0",
+    "ai": "7.0.128",
+    "decibri": "5.8.0",
     "nuxt": "4.5.2",
     "pinyin-pro": "3.29.4",
     "smol-toml": "1.9.0",
-    "taglib-wasm": "2.2.3",
+    "taglib-wasm": "2.3.0",
     "tailwindcss": "4.3.3",
     "uiohook-napi": "1.5.5",
     "zod": "4.6.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "9.5.1",
-    "@electron-forge/cli": "7.11.2",
-    "@electron-forge/maker-zip": "7.11.2",
+    "@electron-forge/cli": "8.0.1",
+    "@electron-forge/maker-zip": "8.0.1",
     "@tsconfig/node-ts": "23.6.4",
     "@tsconfig/node24": "24.0.5",
-    "electron": "44.4.5",
-    "eslint": "10.11.0",
+    "electron": "44.5.1",
+    "eslint": "10.12.0",
     "npm-run-all2": "9.0.3",
     "typescript": "6.0.3",
-    "vue-tsc": "3.3.11"
+    "vue-tsc": "3.3.12"
   }
 }
