@@ -48,7 +48,6 @@ jobs:
 
           $manifest = @"
           {
-            "homepage": "https://github.com/serosme/tools",
             "version": "$env:VERSION",
             "architecture": {
               "64bit": {
