@@ -21,6 +21,8 @@ const {
 } = useChat({
   transport: new DefaultChatTransport({
     api: '/api/chat',
+    // 放进 transport 级别 body，重新生成时同样会带上 model
+    body: () => ({ model: model.value }),
   }),
 })
 
@@ -37,11 +39,7 @@ function onSubmit() {
     return
   }
 
-  sendMessage({ text }, {
-    body: {
-      model: model.value,
-    },
-  })
+  sendMessage({ text })
   input.value = ''
 }
 </script>
