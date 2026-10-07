@@ -1,7 +1,7 @@
 import type { CommandPaletteItem } from '@nuxt/ui'
 
 export default function () {
-  const { data } = useSelfFetch<CommandPaletteItem[]>('/api/command/preset', { default: () => [] })
+  const { data } = useSelfFetch('/api/command/preset', { default: () => [] })
   const items = computed<CommandPaletteItem[]>(() => data.value.map(toCommandItem))
 
   return {
@@ -23,6 +23,6 @@ function toCommandItem(entry: CommandPaletteItem): CommandPaletteItem {
 
   return {
     ...entry,
-    onSelect: () => selfFetch('/api/command/preset/run', { params: { label: entry.label } }),
+    onSelect: () => selfFetch('/api/command/preset/run', { query: { label: entry.label } }),
   }
 }

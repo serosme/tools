@@ -1,4 +1,3 @@
-export const useSelfFetch = createUseFetch(callerOptions => ({
+export const useSelfFetch = createUseFetch({
   $fetch: selfFetch,
-  ...callerOptions,
-}))
+})

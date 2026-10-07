@@ -8,6 +8,7 @@ import {
   streamText,
   toUIMessageStream,
 } from 'ai'
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { aiTools } from '../../utils/ai-tools'
 
 interface ChatBody {

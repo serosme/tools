@@ -1,3 +1,5 @@
+import { $fetch } from '#build/fetch'
+
 export const selfFetch = $fetch.create({
   onResponseError({ response }) {
     useToast().add({

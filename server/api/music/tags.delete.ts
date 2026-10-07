@@ -1,4 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import { defineEventHandler } from 'nuxt/server'
 import { clearTags } from 'taglib-wasm/simple'
 
 export default defineEventHandler(async (event) => {

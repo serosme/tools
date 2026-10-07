@@ -1,5 +1,6 @@
-import type { H3Event } from 'h3'
+import type { RequestEvent } from 'nuxt/server'
 import { basename, extname, join } from 'node:path'
+import { createError, getQuery } from 'nuxt/server'
 
 export const musicExts = new Set(['.mp3', '.flac'])
 
@@ -8,15 +9,15 @@ export function musicDir(): string {
   return readConf().music.path
 }
 
-export function musicId(event: H3Event): string {
-  return (getQuery(event) as { id: string }).id
+export function musicId(event: RequestEvent): string {
+  return getQuery<{ id: string }>(event).id
 }
 
 export function musicPath(id: string): string {
   if (basename(id) !== id || !musicExts.has(extname(id).toLowerCase())) {
     throw createError({
-      statusCode: 400,
-      message: 'Invalid music file',
+      status: 400,
+      statusText: 'Invalid music file',
     })
   }
 

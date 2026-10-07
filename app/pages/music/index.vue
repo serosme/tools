@@ -120,7 +120,7 @@ function onContextMenu(_e: Event, row: TableRow<Music>) {
 async function onDelete() {
   await selfFetch('/api/music', {
     method: 'DELETE',
-    params: { id: contextId.value },
+    query: { id: contextId.value },
   })
   toast.add({ title: 'Deleted', color: 'success', duration: 1200 })
   await load()

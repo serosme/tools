@@ -1,3 +1,4 @@
+import { defineEventHandler, readBody } from 'nuxt/server'
 import { getTagLib } from 'taglib-wasm/simple'
 
 export default defineEventHandler(async (event) => {

@@ -22,9 +22,10 @@ Windows 专属桌面应用：Nuxt 4 SPA 渲染层 + Electron 主进程；Nuxt �
 
 - 目录职责：`app/` 是渲染层，`server/` 是 Nitro 本地 API，`electron/` 是主进程，`shared/` 是跨端类型。
 - Electron 主进程是 **直接运行的 TypeScript**：`package.json` 的 `main` 指向 `electron/index.ts`，编译配置继承 `@tsconfig/node-ts`。`electron/` 内的相对导入必须保留显式 `.ts` 后缀（如 `./ipc/index.ts`），Node 的类型擦除依赖它，不要顺手去掉。
-- `electron:dev` 里的 `CI=1` 用于避免 electron-forge 的 TUI 吞掉 Nuxt dev 日志。
+- `electron:dev` 里的 `CI=1` 与 `nuxt:dev` 的 `--no-tui` 都用于避免各自的 TUI 吞掉对方日志：Nuxt CLI v4 默认会给 `nuxt dev` 画交互面板，在 `run-p` 并行下会与 Electron 输出抢终端。
 - 开发与打包的服务来源不同：打包后 `electron/server/index.ts` 直接 import 构建产物 `.output/server/index.mjs`（`NITRO_PORT` / `HOST` 为 2080 / localhost）；开发时仅等待 `nuxt dev` 在 2080 上就绪。
 - `server/utils/**` 与 `shared/**` 都是自动导入：服务端可直接调用 `readConf`、`musicPath`、`spawnProcess`、`transcribe` 等，渲染层与服务端都可直接使用 `shared` 里的类型（如 `Music`），都不要手动 import。
+- 可移植的服务端代码从 `nuxt/server` 显式导入 `defineEventHandler` / `getQuery` / `readBody` / `createError` 等（Nuxt 4.6+）。**同一文件必须统一来源**：与 h3 的同名自动导入混用会报 `NUXT_E8012`，且 event 形状不同（`event.req` / `event.url` / `event.res`，错误用 `status` / `statusText`）。返回二进制或流时用 `new Response(...)`（Node `Readable` 先 `Readable.toWeb`），不要直接 `return` 原始的 `Uint8Array` 或 Node 流。
 - `pnpm-workspace.yaml` 用 `allowBuilds` 白名单放行依赖的安装脚本（当前为 `esbuild`、`uiohook-napi`、`vue-demi`）；pnpm 默认阻止依赖执行构建脚本，新增需要构建的依赖时要一并加进去。
 - Nuxt 配置为 `ssr: false`。
 - 所有 `/api` 路由都会经过 `server/middleware/local-guard.ts`，仅允许 localhost 与 same-origin。

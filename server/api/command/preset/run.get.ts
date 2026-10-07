@@ -1,4 +1,6 @@
+import { defineEventHandler, getQuery } from 'nuxt/server'
+
 export default defineEventHandler((event) => {
-  const { label } = getQuery(event) as { label: string }
+  const { label } = getQuery<{ label: string }>(event)
   runPreset(label)
 })

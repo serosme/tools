@@ -41,7 +41,7 @@ export function useMusic() {
       return
     }
 
-    const { text } = await selfFetch<{ text: string }>('/api/music/lyrics', { params: { id } })
+    const { text } = await selfFetch<{ text: string }>('/api/music/lyrics', { query: { id } })
 
     if (current.value.id === id)
       lyrics.value = text

@@ -19,7 +19,7 @@ watch(open, (value) => {
 })
 
 async function load() {
-  const data = await selfFetch('/api/music/tags', { params: { id: props.id } })
+  const data = await selfFetch('/api/music/tags', { query: { id: props.id } })
   tags.value = data.tags
   info.value = data.info
 }
@@ -27,7 +27,7 @@ async function load() {
 async function onClear() {
   await selfFetch('/api/music/tags', {
     method: 'DELETE',
-    params: { id: props.id },
+    query: { id: props.id },
   })
   toast.add({ title: 'Tags cleared', color: 'success', duration: 1200 })
   await load()
@@ -37,7 +37,7 @@ async function onClear() {
 async function onSubmit() {
   await selfFetch('/api/music/tags', {
     method: 'PUT',
-    params: { id: props.id },
+    query: { id: props.id },
     body: tags.value,
   })
   toast.add({ title: 'Saved', color: 'success', duration: 1200 })
