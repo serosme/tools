@@ -1,6 +1,9 @@
+import { homedir } from 'node:os'
+import { join } from 'node:path'
+
 const processName = 'mihomo.exe'
-const clashDir = 'C:\\Users\\User\\.config\\mihomo'
-const clashExe = `${clashDir}\\${processName}`
+const clashDir = join(homedir(), '.config', 'mihomo')
+const clashExe = join(clashDir, processName)
 
 export function startClash(tun: boolean): void {
   if (isClashRunning())
