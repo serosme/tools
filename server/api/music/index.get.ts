@@ -3,7 +3,7 @@ import { extname } from 'node:path'
 import { readMetadata } from 'taglib-wasm/simple'
 
 export default defineEventHandler(async (): Promise<Music[]> => {
-  const files = (await readdir(musicDir))
+  const files = (await readdir(musicDir()))
     .filter(file => musicExts.has(extname(file).toLowerCase()))
     .sort()
 
