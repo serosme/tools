@@ -2,13 +2,13 @@ blockExoticSubdeps: false
 
 minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
-  - '@ai-sdk/gateway@4.0.104'
-  - '@ai-sdk/openai-compatible@3.0.63'
-  - '@ai-sdk/provider-utils@5.0.54'
-  - '@ai-sdk/provider@4.0.22'
-  - '@ai-sdk/vue@4.0.128'
-  - '@iconify-json/lucide@1.2.140'
-  - ai@7.0.128
+  - '@ai-sdk/gateway@4.0.106'
+  - '@ai-sdk/openai-compatible@3.0.65'
+  - '@ai-sdk/provider-utils@5.0.56'
+  - '@ai-sdk/provider@4.0.24'
+  - '@ai-sdk/vue@4.0.130'
+  - ai@7.0.130
+  - electron@44.6.0
 
 trustPolicy: no-downgrade
 trustPolicyExclude:
