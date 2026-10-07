@@ -16,6 +16,12 @@ export interface AppConf {
 
 const confPath = join(homedir(), '.config', 'tools', 'config.toml')
 
+// 配置在进程内视为不变，缓存解析结果，避免每个请求同步读盘
+let conf: AppConf | undefined
+
 export function readConf(): AppConf {
-  return parse(readFileSync(confPath, 'utf-8')) as unknown as AppConf
+  if (!conf)
+    conf = parse(readFileSync(confPath, 'utf-8')) as unknown as AppConf
+
+  return conf
 }
