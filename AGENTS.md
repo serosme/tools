@@ -29,7 +29,7 @@ Windows 专属桌面应用：Nuxt 4 SPA 渲染层 + Electron 主进程；Nuxt �
 - `pnpm-workspace.yaml` 用 `allowBuilds` 白名单放行依赖的安装脚本（当前为 `esbuild`、`uiohook-napi`、`vue-demi`）；pnpm 默认阻止依赖执行构建脚本，新增需要构建的依赖时要一并加进去。
 - Nuxt 配置为 `ssr: false`。
 - 所有 `/api` 路由都会经过 `server/middleware/local-guard.ts`，仅允许 localhost 与 same-origin。
-- 配置为 `~/.config/tools/config.toml`，用 smol-toml 解析并由 `readConf()` 在内存中缓存；字段有 `asr.key`、`music.path`、`chat.{baseUrl,apiKey,defaultModel,modelKeywords}`。配置缺失或格式错误会在请求时导致 Chat / ASR / Music 失败。
+- 配置为 `~/.config/tools/config.toml`，用 smol-toml 解析并由 `readConf()` 在内存中缓存；字段有 `asr.{key,hotwords}`、`music.path`、`chat.{baseUrl,apiKey,defaultModel,modelKeywords}`。`asr.hotwords` 是「热词 → 权重」映射，直接作为 Qwen-ASR 的 `vocabulary` 传给接口。配置缺失或格式错误会在请求时导致 Chat / ASR / Music 失败。
 - ASR 通过 `server/plugins/asr.ts` 注册了**全局 CapsLock 录音热键**（uiohook-napi），因此 `nuxt dev` 运行时也会挂上全局键盘钩子。
 - Windows 专属原生依赖：`uiohook-napi`、`decibri`、`@napi-rs/clipboard`、`taglib-wasm`；命令预设会调用 `powershell` / `explorer.exe` / `wt.exe`。
 
