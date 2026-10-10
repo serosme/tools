@@ -9,6 +9,12 @@ minimumReleaseAgeExclude:
   - '@ai-sdk/vue@4.0.130'
   - ai@7.0.130
   - electron@44.6.0
+  - '@nuxt/kit@4.6.1'
+  - '@nuxt/nitro-server@4.6.1'
+  - '@nuxt/schema@4.6.1'
+  - '@nuxt/vite-builder@4.6.1'
+  - '@nuxt/vite-server@4.6.1'
+  - nuxt@4.6.1
 
 trustPolicy: no-downgrade
 trustPolicyExclude:
@@ -17,36 +23,36 @@ trustPolicyExclude:
   - undici-types@6.21.0
   # cssnano 家族 8.x → 9.x：OIDC 发布不再带人工 approver，被 no-downgrade 误判
   # 同一 maintainers、同一 trusted publisher OIDC config、均带 provenance
-  - cssnano@9.3.2
-  - cssnano-preset-default@9.3.2
-  - cssnano-utils@8.2.0
-  - postcss-colormin@9.0.6
-  - postcss-convert-values@9.0.7
-  - postcss-discard-comments@9.0.6
-  - postcss-discard-duplicates@9.0.5
-  - postcss-discard-empty@9.0.6
-  - postcss-discard-overridden@9.0.5
-  - postcss-merge-longhand@9.2.1
-  - postcss-merge-rules@9.1.2
-  - postcss-minify-font-values@9.0.7
-  - postcss-minify-gradients@9.0.6
-  - postcss-minify-params@9.0.6
-  - postcss-minify-selectors@9.0.6
-  - postcss-normalize-charset@9.0.5
-  - postcss-normalize-display-values@9.0.5
-  - postcss-normalize-positions@9.0.6
-  - postcss-normalize-repeat-style@9.0.5
-  - postcss-normalize-string@9.0.5
-  - postcss-normalize-timing-functions@9.0.5
-  - postcss-normalize-unicode@9.0.5
-  - postcss-normalize-url@9.0.5
-  - postcss-normalize-whitespace@9.0.5
-  - postcss-ordered-values@9.0.7
-  - postcss-reduce-initial@9.0.6
-  - postcss-reduce-transforms@9.0.4
-  - postcss-svgo@9.0.4
-  - postcss-unique-selectors@9.0.5
-  - stylehacks@9.0.7
+  - cssnano@9.4.0
+  - cssnano-preset-default@9.4.0
+  - cssnano-utils@8.2.1
+  - postcss-colormin@9.0.7
+  - postcss-convert-values@9.0.8
+  - postcss-discard-comments@9.0.7
+  - postcss-discard-duplicates@9.0.6
+  - postcss-discard-empty@9.0.7
+  - postcss-discard-overridden@9.0.6
+  - postcss-merge-longhand@9.3.0
+  - postcss-merge-rules@9.1.3
+  - postcss-minify-font-values@9.0.8
+  - postcss-minify-gradients@9.0.7
+  - postcss-minify-params@9.0.7
+  - postcss-minify-selectors@9.0.7
+  - postcss-normalize-charset@9.0.6
+  - postcss-normalize-display-values@9.0.6
+  - postcss-normalize-positions@9.0.7
+  - postcss-normalize-repeat-style@9.0.6
+  - postcss-normalize-string@9.0.6
+  - postcss-normalize-timing-functions@9.0.6
+  - postcss-normalize-unicode@9.0.6
+  - postcss-normalize-url@9.0.6
+  - postcss-normalize-whitespace@9.0.6
+  - postcss-ordered-values@9.0.8
+  - postcss-reduce-initial@9.0.7
+  - postcss-reduce-transforms@9.0.5
+  - postcss-svgo@9.0.5
+  - postcss-unique-selectors@9.0.6
+  - stylehacks@9.0.8
 
 nodeLinker: hoisted
 shellEmulator: true
