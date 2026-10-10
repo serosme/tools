@@ -18,18 +18,18 @@
     "build": "run-s --silent nuxt:build electron:build"
   },
   "dependencies": {
-    "@ai-sdk/openai-compatible": "3.0.65",
-    "@ai-sdk/vue": "4.0.130",
+    "@ai-sdk/openai-compatible": "3.0.67",
+    "@ai-sdk/vue": "4.0.137",
     "@comark/nuxt": "0.7.0",
-    "@iconify-json/lucide": "1.2.140",
+    "@iconify-json/lucide": "1.2.142",
     "@napi-rs/clipboard": "1.1.4",
     "@nuxt/ui": "4.11.3",
     "@vueuse/core": "15.0.0",
-    "ai": "7.0.130",
+    "ai": "7.0.137",
     "decibri": "5.8.0",
     "nuxt": "4.6.1",
-    "pinyin-pro": "3.29.4",
-    "smol-toml": "1.9.0",
+    "pinyin-pro": "3.29.5",
+    "smol-toml": "1.9.1",
     "taglib-wasm": "2.3.0",
     "tailwindcss": "4.3.3",
     "uiohook-napi": "1.5.5",
@@ -41,10 +41,10 @@
     "@electron-forge/maker-zip": "8.0.1",
     "@tsconfig/node-ts": "23.6.4",
     "@tsconfig/node24": "24.0.5",
-    "electron": "44.6.0",
+    "electron": "44.7.0",
     "eslint": "10.12.0",
     "npm-run-all2": "9.0.3",
     "typescript": "6.0.3",
-    "vue-tsc": "3.3.12"
+    "vue-tsc": "3.3.13"
   }
 }
