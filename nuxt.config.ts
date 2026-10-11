@@ -25,7 +25,7 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  modules: ['@nuxt/ui', '@comark/nuxt'],
+  modules: ['@nuxt/ui'],
 
   devtools: {
     enabled: false,

@@ -6,12 +6,6 @@ import { parse } from 'smol-toml'
 export interface AppConf {
   asr: { key: string, hotwords?: Record<string, number> }
   music: { path: string }
-  chat: {
-    baseUrl: string
-    apiKey: string
-    defaultModel?: string
-    modelKeywords?: string[]
-  }
 }
 
 const confPath = join(homedir(), '.config', 'tools', 'tools.toml')

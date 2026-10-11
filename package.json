@@ -18,22 +18,17 @@
     "build": "run-s --silent nuxt:build electron:build"
   },
   "dependencies": {
-    "@ai-sdk/openai-compatible": "3.0.67",
-    "@ai-sdk/vue": "4.0.137",
-    "@comark/nuxt": "0.7.0",
     "@iconify-json/lucide": "1.2.142",
     "@napi-rs/clipboard": "1.1.4",
     "@nuxt/ui": "4.11.3",
     "@vueuse/core": "15.0.0",
-    "ai": "7.0.137",
     "decibri": "5.8.0",
     "nuxt": "4.6.1",
     "pinyin-pro": "3.29.5",
     "smol-toml": "1.9.1",
     "taglib-wasm": "2.3.0",
     "tailwindcss": "4.3.3",
-    "uiohook-napi": "1.5.5",
-    "zod": "4.6.5"
+    "uiohook-napi": "1.5.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "9.5.1",
