@@ -4,7 +4,7 @@ Windows 专属桌面应用：Nuxt 4 SPA 渲染层 + Electron 主进程；Nuxt �
 
 ## 命令
 
-包管理器固定为 **pnpm**（`pnpm@12.9.1`），不用 npm / yarn。
+包管理器固定为 **pnpm**（`packageManager` 字段，当前 `12.11.2`），不用 npm / yarn。
 
 | 命令 | 说明 |
 | --- | --- |
@@ -15,6 +15,7 @@ Windows 专属桌面应用：Nuxt 4 SPA 渲染层 + Electron 主进程；Nuxt �
 | `pnpm build` | 先 `nuxt:build` 再 `electron:build`，顺序不能反 |
 
 - 没有任何测试。改动校验顺序为 `pnpm lint` 再 `pnpm typecheck`；`nuxt build` 不做类型检查。
+- `pnpm dev` 用 `run-p --race`：Nuxt 或 Electron 任一方退出都会终止整个 dev，不要只盯着其中一个日志排错。
 
 ## 关键接线
 
@@ -26,8 +27,8 @@ Windows 专属桌面应用：Nuxt 4 SPA 渲染层 + Electron 主进程；Nuxt �
 - 开发与打包的服务来源不同：打包后 `electron/server/index.ts` 直接 import 构建产物 `.output/server/index.mjs`（`NITRO_PORT` / `HOST` 为 2080 / localhost）；开发时仅等待 `nuxt dev` 在 2080 上就绪。
 - `server/utils/**` 与 `shared/**` 都是自动导入：服务端可直接调用 `readConf`、`musicPath`、`spawnProcess`、`transcribe` 等，渲染层与服务端都可直接使用 `shared` 里的类型（如 `Music`），都不要手动 import。
 - 可移植的服务端代码从 `nuxt/server` 显式导入 `defineEventHandler` / `getQuery` / `readBody` / `createError` 等（Nuxt 4.6+）。**同一文件必须统一来源**：与 h3 的同名自动导入混用会报 `NUXT_E8012`，且 event 形状不同（`event.req` / `event.url` / `event.res`，错误用 `status` / `statusText`）。返回二进制或流时用 `new Response(...)`（Node `Readable` 先 `Readable.toWeb`），不要直接 `return` 原始的 `Uint8Array` 或 Node 流。
-- `pnpm-workspace.yaml` 用 `allowBuilds` 白名单放行依赖的安装脚本（当前为 `esbuild`、`uiohook-napi`、`vue-demi`）；pnpm 默认阻止依赖执行构建脚本，新增需要构建的依赖时要一并加进去。
-- Nuxt 配置为 `ssr: false`。
+- `pnpm-workspace.yaml` 用 `allowBuilds` 白名单放行依赖的安装脚本（当前为 `esbuild`、`uiohook-napi`、`vue-demi`）；pnpm 默认阻止依赖执行构建脚本，新增需要构建的依赖时要一并加进去。该文件还设了 `nodeLinker: hoisted`、`trustPolicy: no-downgrade`，升级依赖若被信任策略拦下，需在 `trustPolicyExclude` 里单独放行。
+- Nuxt 配置为 `ssr: false`，启用 `experimental.routeTypedFetch` + `strictRouteTypes`：`$fetch`/`useFetch` 的路径与 method 由生成的路由类型校验，拼错路径或不支持的 method 直接报类型错误。渲染层的 `selfFetch` 从 `#build/fetch` 显式导入 `$fetch` 正是为了拿到这套类型。
 - 所有 `/api` 路由都会经过 `server/middleware/local-guard.ts`，仅允许 localhost 与 same-origin。
 - 配置为 `~/.config/tools/tools.toml`，用 smol-toml 解析并由 `readConf()` 在内存中缓存；字段有 `asr.{key,hotwords}`、`music.path`。`asr.hotwords` 是「热词 → 权重」映射，直接作为 Qwen-ASR 的 `vocabulary` 传给接口。配置缺失或格式错误会在请求时导致 ASR / Music 失败。
 - ASR 通过 `server/plugins/asr.ts` 注册了**全局 CapsLock 录音热键**（uiohook-napi），因此 `nuxt dev` 运行时也会挂上全局键盘钩子。
