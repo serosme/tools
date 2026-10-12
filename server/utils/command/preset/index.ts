@@ -3,6 +3,11 @@ import { Buffer } from 'node:buffer'
 
 const presetTree: CommandPaletteItem[] = [
   {
+    label: 'DeepSeek Harness',
+    icon: 'i-lucide-sparkles',
+    action: () => openTerminal('dsh web'),
+  },
+  {
     label: 'Clash',
     icon: 'i-lucide-shield',
     children: [
