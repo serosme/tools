@@ -11,6 +11,7 @@ minimumReleaseAgeExclude:
   - '@vue/language-core@3.3.13'
   - pinyin-pro@3.29.5
   - vue-tsc@3.3.13
+  - '@iconify-json/lucide@1.2.143'
 
 trustPolicy: no-downgrade
 trustPolicyExclude:

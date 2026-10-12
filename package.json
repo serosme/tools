@@ -18,7 +18,7 @@
     "build": "run-s --silent nuxt:build electron:build"
   },
   "dependencies": {
-    "@iconify-json/lucide": "1.2.142",
+    "@iconify-json/lucide": "1.2.143",
     "@napi-rs/clipboard": "1.1.4",
     "@nuxt/ui": "4.11.3",
     "@vueuse/core": "15.0.0",
@@ -26,7 +26,7 @@
     "nuxt": "4.6.1",
     "pinyin-pro": "3.29.5",
     "smol-toml": "1.9.1",
-    "taglib-wasm": "2.3.0",
+    "taglib-wasm": "2.4.0",
     "tailwindcss": "4.3.3",
     "uiohook-napi": "1.5.5"
   },
