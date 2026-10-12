@@ -9,7 +9,7 @@ const presetTree: CommandPaletteItem[] = [
   },
   {
     label: 'DeepSeek Harness',
-    icon: 'i-lucide-sparkles',
+    icon: 'i-lucide-atom',
     action: () => openTerminal('dsh web'),
   },
   {
