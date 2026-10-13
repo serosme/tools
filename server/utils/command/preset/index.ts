@@ -8,11 +8,6 @@ const presetTree: CommandPaletteItem[] = [
     action: () => openTerminal('opencode'),
   },
   {
-    label: 'DeepSeek Harness',
-    icon: 'i-lucide-atom',
-    action: () => openTerminal('dsh web'),
-  },
-  {
     label: 'Clash',
     icon: 'i-lucide-shield',
     children: [
