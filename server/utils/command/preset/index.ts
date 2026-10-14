@@ -3,11 +3,6 @@ import { Buffer } from 'node:buffer'
 
 const presetTree: CommandPaletteItem[] = [
   {
-    label: 'OpenCode',
-    icon: 'i-lucide-terminal',
-    action: () => openTerminal('opencode'),
-  },
-  {
     label: 'Clash',
     icon: 'i-lucide-shield',
     children: [
