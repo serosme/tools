@@ -109,6 +109,11 @@ const tableMeta = {
   },
 }
 
+// UTable 的 root 就是滚动容器（theme root 是 overflow-auto），遮罩必须挂在它身上才有意义；
+// 表头因此不能留在表内（sticky 的 thead 会被上下边缘的渐变一起淡掉），改为手写在滚动容器外面
+const tableRef = useTemplateRef('tableRef')
+const tableMask = useScrollMask(computed(() => (tableRef.value?.$el as HTMLElement | undefined) ?? null))
+
 function onSelect(_e: Event, row: TableRow<Music>) {
   playAt(row.original)
 }
@@ -148,14 +153,35 @@ const rowMenu = computed<ContextMenuItem[][]>(() => [
 <template>
   <div class="flex h-screen flex-col">
     <div class="flex min-h-0 flex-1">
-      <div class="h-full w-1/3 overflow-hidden">
+      <div class="flex h-full w-1/3 flex-col overflow-hidden">
+        <!-- 表头在滚动容器外，才不会被遮罩淡掉；列宽与 th 文案需手动与 columns 保持一致 -->
+        <table class="w-full table-fixed text-sm text-highlighted">
+          <thead>
+            <tr class="border-b border-accented">
+              <th class="w-12 px-4 py-3.5 text-start font-semibold">
+                #
+              </th>
+              <th class="px-4 py-3.5 text-start font-semibold">
+                Title
+              </th>
+              <th class="px-4 py-3.5 text-start font-semibold">
+                Artist
+              </th>
+              <th class="w-20 px-4 py-3.5 text-end font-semibold">
+                Duration
+              </th>
+            </tr>
+          </thead>
+        </table>
         <UContextMenu :items="rowMenu">
           <UTable
+            ref="tableRef"
             :data="musics"
             :columns="columns"
             :meta="tableMeta"
-            class="h-full scrollbar-none"
-            :ui="{ base: 'w-full table-fixed', thead: 'sticky top-0 z-10 bg-default' }"
+            class="min-h-0 flex-1 scrollbar-none"
+            :style="tableMask"
+            :ui="{ base: 'w-full table-fixed', thead: 'hidden' }"
             @select="onSelect"
             @contextmenu="onContextMenu"
           >

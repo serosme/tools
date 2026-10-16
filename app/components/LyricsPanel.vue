@@ -37,8 +37,6 @@ const activeIndex = computed(() =>
 
 // 行高：与下方条目的 h-10 对应
 const LINE_HEIGHT = 40
-// 边缘淡出深度取行高的两倍，让整行在渐变里完成进出场，而不是被切掉半行
-const SHADOW_SIZE = 80
 
 const container = useTemplateRef<HTMLDivElement>('container')
 const { height } = useElementSize(container)
@@ -56,6 +54,10 @@ const virtualizeOptions = computed(() => ({
 
 const scrollArea = useTemplateRef('scrollArea')
 
+// 遮罩不用 UScrollArea 的 shadow prop：歌词同样由接口异步填充，shadow 走的是 useScrollShadow 的滞留
+// 路径，首屏要等用户第一次滚动才画得出下边缘渐变
+const scrollMask = useScrollMask(computed(() => (scrollArea.value?.$el as HTMLElement | undefined) ?? null))
+
 // height 一并作为依赖：容器尺寸变化后重新居中，顺带校正首帧 padding 尚未测量时的那次定位。
 // 仅尺寸变化时用 auto，避免拖拽窗口时平滑动画一直追不上中心
 watch([activeIndex, lines, height], ([index], [prevIndex]) => {
@@ -72,8 +74,8 @@ watch([activeIndex, lines, height], ([index], [prevIndex]) => {
       v-if="lines.length"
       ref="scrollArea"
       class="h-full w-full select-none overflow-hidden!"
+      :style="scrollMask"
       :items="lines"
-      :shadow="{ size: SHADOW_SIZE }"
       :virtualize="virtualizeOptions"
     >
       <template #default="{ item, index }">
