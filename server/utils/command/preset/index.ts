@@ -38,11 +38,6 @@ const presetTree: CommandPaletteItem[] = [
         action: () => openTerminal('mise upgrade; mise prune'),
       },
       {
-        label: 'Npm',
-        icon: 'i-lucide-package',
-        action: () => openTerminal('ncu -g'),
-      },
-      {
         label: 'Winget',
         icon: 'i-lucide-monitor',
         action: () => openTerminal('winget update --all'),
