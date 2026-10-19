@@ -221,6 +221,7 @@ const rowMenu = computed<ContextMenuItem[][]>(() => [
         </div>
       </div>
       <div class="flex w-3/5 flex-col items-center justify-center gap-3">
+        <!-- 未选曲时控制按钮禁用；禁用态用默认光标（! 覆盖 Nuxt UI 的 disabled:cursor-not-allowed） -->
         <div class="flex items-center justify-center gap-8">
           <UButton
             icon="i-lucide-shuffle"
@@ -237,8 +238,9 @@ const rowMenu = computed<ContextMenuItem[][]>(() => [
             variant="link"
             size="xl"
             color="neutral"
+            :disabled="!current.id"
             :ui="{
-              base: 'p-0',
+              base: 'p-0 disabled:cursor-default!',
             }"
             @click="prev()"
           />
@@ -246,8 +248,9 @@ const rowMenu = computed<ContextMenuItem[][]>(() => [
             :icon="wantPlay ? 'i-lucide-pause' : 'i-lucide-play'"
             variant="link"
             size="xl"
+            :disabled="!current.id"
             :ui="{
-              base: 'p-0',
+              base: 'p-0 disabled:cursor-default!',
               leadingIcon: 'size-12',
             }"
             @click="togglePlay()"
@@ -257,8 +260,9 @@ const rowMenu = computed<ContextMenuItem[][]>(() => [
             variant="link"
             size="xl"
             color="neutral"
+            :disabled="!current.id"
             :ui="{
-              base: 'p-0',
+              base: 'p-0 disabled:cursor-default!',
             }"
             @click="next()"
           />
@@ -278,9 +282,10 @@ const rowMenu = computed<ContextMenuItem[][]>(() => [
           <USlider
             v-model="currentTimeSlider"
             :min="0"
-            :max="displayDuration"
+            :max="displayDuration || 1"
+            :disabled="!current.id"
             :ui="{
-              root: 'cursor-pointer',
+              root: current.id ? 'cursor-pointer' : 'cursor-default',
             }"
             @change="commitSeek"
             @pointercancel="commitSeek"
