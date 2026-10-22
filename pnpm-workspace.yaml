@@ -1,11 +1,5 @@
 blockExoticSubdeps: false
-
 minimumReleaseAgeExcludePrune: true
-minimumReleaseAgeExclude:
-  - '@iconify-json/lucide@1.2.145'
-  - '@nuxt/ui@4.12.0'
-  - electron@44.8.0
-
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 1440
 nodeLinker: hoisted

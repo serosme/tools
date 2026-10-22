@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@12.11.2",
+  "packageManager": "pnpm@12.14.0",
   "main": "electron/index.ts",
   "scripts": {
     "postinstall": "nuxt prepare",
@@ -18,12 +18,12 @@
     "build": "run-s --silent nuxt:build electron:build"
   },
   "dependencies": {
-    "@iconify-json/lucide": "1.2.145",
+    "@iconify-json/lucide": "1.2.147",
     "@napi-rs/clipboard": "1.1.4",
     "@nuxt/ui": "4.12.0",
     "@vueuse/core": "15.0.0",
     "decibri": "5.8.0",
-    "nuxt": "4.6.1",
+    "nuxt": "4.6.2",
     "pinyin-pro": "3.29.5",
     "smol-toml": "1.9.1",
     "taglib-wasm": "2.4.0",
@@ -37,7 +37,7 @@
     "@tsconfig/node-ts": "23.6.4",
     "@tsconfig/node24": "24.0.5",
     "electron": "44.8.0",
-    "eslint": "10.12.0",
+    "eslint": "10.13.0",
     "npm-run-all2": "9.0.3",
     "typescript": "6.0.3",
     "vue-tsc": "3.3.13"
