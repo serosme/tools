@@ -44,6 +44,11 @@ const presetTree: CommandPaletteItem[] = [
       },
     ],
   },
+  {
+    label: 'Aria2',
+    icon: 'i-lucide-download',
+    action: () => openTerminal('aria2c --enable-rpc --rpc-allow-origin-all=true'),
+  },
 ]
 
 export function getPresetTree() {
