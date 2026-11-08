@@ -3,7 +3,9 @@ import type { CommandPaletteItem } from '@nuxt/ui'
 const origin = window.location.origin
 
 export default function () {
-  const { data } = useSelfFetch<CommandPaletteItem[]>('/api/command/website', { default: () => [] })
+  const { data } = useSelfFetch<CommandPaletteItem[]>('/api/command/website', {
+    default: () => [],
+  })
   const items = computed<CommandPaletteItem[]>(() => data.value.map(toCommandItem))
 
   return {

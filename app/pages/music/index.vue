@@ -40,7 +40,9 @@ function sliderModel(source: Ref<number>) {
   return computed<SliderValue>({
     get: () => source.value,
     set: (value) => {
-      source.value = Array.isArray(value) ? value[0]! : value
+      source.value = Array.isArray(value)
+        ? value[0]!
+        : value
     },
   })
 }
@@ -62,7 +64,9 @@ const currentTimeSlider = computed<SliderValue>({
   get: () => displayTime.value,
   set: (value) => {
     seeking.value = true
-    seekValue.value = Array.isArray(value) ? value[0]! : value
+    seekValue.value = Array.isArray(value)
+      ? value[0]!
+      : value
   },
 })
 
@@ -80,7 +84,9 @@ const columns: TableColumn<Music>[] = [
   {
     id: 'index',
     header: '#',
-    meta: { class: { th: 'w-12', td: 'w-12 text-dimmed tabular-nums' } },
+    meta: {
+      class: { th: 'w-12', td: 'w-12 text-dimmed tabular-nums' },
+    },
     cell: ({ row }) => String(row.index),
   },
   {
@@ -94,7 +100,9 @@ const columns: TableColumn<Music>[] = [
   {
     accessorKey: 'duration',
     header: 'Duration',
-    meta: { class: { th: 'w-20 text-end', td: 'w-20 text-end tabular-nums' } },
+    meta: {
+      class: { th: 'w-20 text-end', td: 'w-20 text-end tabular-nums' },
+    },
     cell: ({ getValue }) => {
       const value = getValue<number>()
       return formatTime(value)
@@ -105,7 +113,9 @@ const columns: TableColumn<Music>[] = [
 // 正在播放的那一行高亮（函数在每次渲染时按行求值）
 const tableMeta = {
   class: {
-    tr: (row: TableRow<Music>) => row.original.id === current.value.id ? 'bg-elevated/50' : '',
+    tr: (row: TableRow<Music>) => row.original.id === current.value.id
+      ? 'bg-elevated/50'
+      : '',
   },
 }
 

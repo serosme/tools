@@ -15,9 +15,16 @@ function spawnDirect(command: string, args: string[]) {
 }
 
 function spawnElevated(command: string, args: string[]) {
-  const psArgumentList = args.length ? ` -ArgumentList ${args.map(arg => `'${arg}'`).join(',')}` : ''
+  const psArgumentList = args.length
+    ? ` -ArgumentList ${args.map(arg => `'${arg}'`).join(',')}`
+    : ''
   const psCommand = `Start-Process -FilePath '${command}'${psArgumentList} -Verb RunAs -WindowStyle Hidden`
-  spawn('powershell', ['-NoProfile', '-NonInteractive', '-Command', psCommand], {
+  spawn('powershell', [
+    '-NoProfile',
+    '-NonInteractive',
+    '-Command',
+    psCommand,
+  ], {
     stdio: 'ignore',
     windowsHide: true,
     cwd: childCwd,
@@ -38,5 +45,7 @@ function decodeOutput(bytes: Uint8Array | null | undefined): string {
   if (!bytes?.length)
     return ''
   const text = new TextDecoder('utf-8').decode(bytes)
-  return text.includes('\uFFFD') ? new TextDecoder('gbk').decode(bytes) : text
+  return text.includes('\uFFFD')
+    ? new TextDecoder('gbk').decode(bytes)
+    : text
 }

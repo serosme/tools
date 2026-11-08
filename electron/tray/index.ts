@@ -27,18 +27,30 @@ function windowMenu(win: BrowserWindow): MenuItemConstructorOptions[] {
         win.focus()
       },
     },
-    { label: 'DevTools', click: () => win.webContents.toggleDevTools() },
+    {
+      label: 'DevTools',
+      click: () => win.webContents.toggleDevTools(),
+    },
     { type: 'separator' },
     // 使用 destroy 来真正关掉窗口
-    { label: 'Close', click: () => win.destroy() },
+    {
+      label: 'Close',
+      click: () => win.destroy(),
+    },
   ]
 }
 
 // 重建托盘菜单
 function refresh() {
   tray.setContextMenu(Menu.buildFromTemplate([
-    ...getWindows().map(({ name, win }) => ({ label: name, submenu: windowMenu(win) })),
+    ...getWindows().map(({ name, win }) => ({
+      label: name,
+      submenu: windowMenu(win),
+    })),
     { type: 'separator' },
-    { label: 'Quit', click: () => app.quit() },
+    {
+      label: 'Quit',
+      click: () => app.quit(),
+    },
   ]))
 }

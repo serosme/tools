@@ -12,7 +12,9 @@ function getAllApplications(): ApplicationItem[] {
 
   const applications = JSON.parse(stdout) as Array<{ Name: string, AppID: string }>
 
-  lastApplications = [...new Map(applications.map(a => [a.Name, a])).values()]
+  lastApplications = [
+    ...new Map(applications.map(a => [a.Name, a])).values(),
+  ]
     .map(a => ({ name: a.Name, id: a.AppID }))
   return lastApplications
 }

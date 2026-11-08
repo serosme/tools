@@ -14,13 +14,17 @@ const props = defineProps<Props>()
 
 function parseLrc(raw: string): LyricLine[] {
   return raw.split(/\r?\n/).flatMap((line) => {
-    const matches = [...line.matchAll(/\[(\d{1,2}):(\d{2})(?:\.(\d{1,3}))?\]/g)]
+    const matches = [
+      ...line.matchAll(/\[(\d{1,2}):(\d{2})(?:\.(\d{1,3}))?\]/g),
+    ]
     const text = line.replace(/^\s*(?:\[\d{1,2}:\d{2}(?:\.\d{1,3})?\]\s*)+/, '').trim()
     if (!matches.length || !text)
       return []
 
     return matches.map(([, m, s, ms]) => ({
-      time: Number(m) * 60 + Number(s) + (ms ? Number(ms) / 10 ** ms.length : 0),
+      time: Number(m) * 60 + Number(s) + (ms
+        ? Number(ms) / 10 ** ms.length
+        : 0),
       text,
     }))
   }).sort((a, b) => a.time - b.time)
@@ -63,7 +67,9 @@ const scrollMask = useScrollMask(computed(() => (scrollArea.value?.$el as HTMLEl
 watch([activeIndex, lines, height], ([index], [prevIndex]) => {
   scrollArea.value?.virtualizer?.scrollToIndex(Math.max(index, 0), {
     align: 'center',
-    behavior: index === prevIndex ? 'auto' : 'smooth',
+    behavior: index === prevIndex
+      ? 'auto'
+      : 'smooth',
   })
 }, { immediate: true, flush: 'post' })
 </script>

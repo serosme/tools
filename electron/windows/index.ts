@@ -39,7 +39,9 @@ export async function createWindow(name: string, url: string, options: BrowserWi
 
 // 获取所有窗口
 export function getWindows() {
-  return [...windows.entries()].map(([name, win]) => ({ name, win }))
+  return [
+    ...windows.entries(),
+  ].map(([name, win]) => ({ name, win }))
 }
 
 // 显示或隐藏窗口

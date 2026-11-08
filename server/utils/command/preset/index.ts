@@ -71,7 +71,12 @@ function findPresetAction(entries: CommandPaletteItem[], label: string): (() => 
 }
 
 function openTerminal(command: string): void {
-  spawnProcess('wt.exe', ['powershell', '-NoExit', '-EncodedCommand', toEncodedCommand(command)])
+  spawnProcess('wt.exe', [
+    'powershell',
+    '-NoExit',
+    '-EncodedCommand',
+    toEncodedCommand(command),
+  ])
 }
 
 function toEncodedCommand(command: string): string {

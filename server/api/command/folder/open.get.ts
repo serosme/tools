@@ -2,5 +2,7 @@ import { defineEventHandler, getQuery } from 'nuxt/server'
 
 export default defineEventHandler((event) => {
   const { name } = getQuery<{ name: string }>(event)
-  spawnProcess('explorer.exe', [getFolderPath(name)])
+  spawnProcess('explorer.exe', [
+    getFolderPath(name),
+  ])
 })

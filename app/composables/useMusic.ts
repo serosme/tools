@@ -41,7 +41,9 @@ export function useMusic() {
       return
     }
 
-    const { text } = await selfFetch<{ text: string }>('/api/music/lyrics', { query: { id } })
+    const { text } = await selfFetch<{ text: string }>('/api/music/lyrics', {
+      query: { id },
+    })
 
     if (current.value.id === id)
       lyrics.value = text
@@ -97,7 +99,9 @@ export function useMusic() {
 
   function prev() {
     const index = currentIndex.value
-    playAt(musics.value[index <= 0 ? musics.value.length - 1 : index - 1])
+    playAt(musics.value[index <= 0
+      ? musics.value.length - 1
+      : index - 1])
   }
 
   // 播放结束自动下一首：随机模式随机切换，顺序模式到末尾时仅循环模式继续

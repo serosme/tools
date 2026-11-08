@@ -2,7 +2,9 @@ import { defineEventHandler } from 'nuxt/server'
 import { readTags } from 'taglib-wasm/simple'
 
 function hideBinary(_key: string, value: unknown) {
-  return value instanceof Uint8Array ? `<binary ${value.byteLength} bytes>` : value
+  return value instanceof Uint8Array
+    ? `<binary ${value.byteLength} bytes>`
+    : value
 }
 
 export default defineEventHandler(async (event) => {

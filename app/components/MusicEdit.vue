@@ -10,7 +10,12 @@ const emit = defineEmits<{
 const toast = useToast()
 
 const open = defineModel<boolean>('open', { required: true })
-const tags = ref({ title: '', artist: '', album: '', lyrics: '' })
+const tags = ref({
+  title: '',
+  artist: '',
+  album: '',
+  lyrics: '',
+})
 const info = ref('')
 
 watch(open, (value) => {
@@ -19,7 +24,9 @@ watch(open, (value) => {
 })
 
 async function load() {
-  const data = await selfFetch('/api/music/tags', { query: { id: props.id } })
+  const data = await selfFetch('/api/music/tags', {
+    query: { id: props.id },
+  })
   tags.value = data.tags
   info.value = data.info
 }

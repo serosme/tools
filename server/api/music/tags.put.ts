@@ -10,6 +10,10 @@ export default defineEventHandler(async (event) => {
       .setTitle(body.title)
       .setArtist(body.artist)
       .setAlbum(body.album)
-    audioFile.setLyrics(body.lyrics ? [{ text: body.lyrics }] : [])
+    audioFile.setLyrics(body.lyrics
+      ? [
+          { text: body.lyrics },
+        ]
+      : [])
   })
 })

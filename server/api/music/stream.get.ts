@@ -26,7 +26,10 @@ export default defineEventHandler((event) => {
 
   if (!range) {
     return new Response(toWebStream(createReadStream(path)), {
-      headers: { ...headers, 'Content-Length': String(size) },
+      headers: {
+        ...headers,
+        'Content-Length': String(size),
+      },
     })
   }
 
@@ -39,7 +42,9 @@ export default defineEventHandler((event) => {
     throw createError({ status: 416, statusText: 'Range Not Satisfiable' })
   }
 
-  const end = Math.max(start, Math.min(to ? Number(to) : size - 1, size - 1))
+  const end = Math.max(start, Math.min(to
+    ? Number(to)
+    : size - 1, size - 1))
 
   return new Response(toWebStream(createReadStream(path, { start, end })), {
     status: 206,

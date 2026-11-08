@@ -23,6 +23,12 @@ export function stopClash(): void {
 }
 
 function isClashRunning(): boolean {
-  const { stdout } = spawnProcessSync('tasklist', ['/NH', '/FO', 'CSV', '/FI', `IMAGENAME eq ${processName}`])
+  const { stdout } = spawnProcessSync('tasklist', [
+    '/NH',
+    '/FO',
+    'CSV',
+    '/FI',
+    `IMAGENAME eq ${processName}`,
+  ])
   return stdout.includes(processName)
 }
