@@ -4,7 +4,6 @@ import { join } from 'node:path'
 import { parse } from 'smol-toml'
 
 export interface AppConf {
-  asr: { key: string, hotwords?: Record<string, number> }
   music: { path: string }
 }
 

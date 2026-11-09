@@ -19,16 +19,13 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.152",
-    "@napi-rs/clipboard": "1.1.4",
     "@nuxt/ui": "4.12.0",
     "@vueuse/core": "15.0.0",
-    "decibri": "5.8.0",
     "nuxt": "4.6.4",
     "pinyin-pro": "3.29.5",
     "smol-toml": "1.9.1",
     "taglib-wasm": "2.4.1",
-    "tailwindcss": "4.3.5",
-    "uiohook-napi": "1.5.5"
+    "tailwindcss": "4.3.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "10.0.0",
