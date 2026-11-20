@@ -1,7 +1,11 @@
 import type { CommandPaletteItem } from '@nuxt/ui'
-import { Buffer } from 'node:buffer'
 
 const presetTree: CommandPaletteItem[] = [
+  {
+    label: 'Pi',
+    icon: 'i-lucide-square-terminal',
+    action: startPiTemp,
+  },
   {
     label: 'Clash',
     icon: 'i-lucide-shield',
@@ -68,17 +72,4 @@ function findPresetAction(entries: CommandPaletteItem[], label: string): (() => 
     if (found)
       return found
   }
-}
-
-function openTerminal(command: string): void {
-  spawnProcess('wt.exe', [
-    'powershell',
-    '-NoExit',
-    '-EncodedCommand',
-    toEncodedCommand(command),
-  ])
-}
-
-function toEncodedCommand(command: string): string {
-  return Buffer.from(command, 'utf16le').toString('base64')
 }
