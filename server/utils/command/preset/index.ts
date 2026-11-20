@@ -29,7 +29,7 @@ const presetTree: CommandPaletteItem[] = [
   },
   {
     label: 'Update',
-    icon: 'i-lucide-arrow-up',
+    icon: 'i-lucide-refresh-cw',
     children: [
       {
         label: 'Scoop',
