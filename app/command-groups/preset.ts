@@ -9,7 +9,7 @@ export default function () {
   return {
     id: 'preset',
     label: 'Preset',
-    order: 2,
+    order: 1,
     countItems: true,
     items,
   }

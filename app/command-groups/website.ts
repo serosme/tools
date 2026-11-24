@@ -11,7 +11,7 @@ export default function () {
   return {
     id: 'website',
     label: 'Website',
-    order: 1,
+    order: 2,
     countItems: true,
     items,
   }
