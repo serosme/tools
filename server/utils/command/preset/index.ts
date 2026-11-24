@@ -4,7 +4,18 @@ const presetTree: CommandPaletteItem[] = [
   {
     label: 'Pi',
     icon: 'i-lucide-square-terminal',
-    action: startPiTemp,
+    children: [
+      {
+        label: 'Tmp',
+        icon: 'i-lucide-folder',
+        action: startPiTemp,
+      },
+      {
+        label: 'Clipboard',
+        icon: 'i-lucide-clipboard',
+        action: startPiClipboard,
+      },
+    ],
   },
   {
     label: 'Clash',
