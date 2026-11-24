@@ -1,14 +1,11 @@
 import { Buffer } from 'node:buffer'
 
 export function openTerminal(command: string, cwd?: string): void {
-  const args = [
-    'powershell',
-    '-NoExit',
-    '-EncodedCommand',
-    toEncodedCommand(command),
-  ]
+  // `-w 0` 表示在最近使用的窗口里新开标签页，而不是弹出新窗口
+  const args = ['-w', '0']
   if (cwd)
-    args.unshift('-d', cwd)
+    args.push('-d', cwd)
+  args.push('powershell', '-NoExit', '-EncodedCommand', toEncodedCommand(command))
 
   spawnProcess('wt.exe', args)
 }
