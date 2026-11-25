@@ -1,7 +1,11 @@
-import { ipcMain } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 import { createWindow } from '../windows/index.ts'
 
 export function registerIpcHandlers() {
+  ipcMain.handle('window:hide', (event) => {
+    BrowserWindow.fromWebContents(event.sender)?.hide()
+  })
+
   ipcMain.handle('window:open', async (_event, payload: { name: string, url: string }) => {
     const url = new URL(payload.url)
 
