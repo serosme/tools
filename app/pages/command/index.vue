@@ -19,4 +19,6 @@ const { searchTerm, paletteKey, groups, resetPalette, resultLimit } = useCommand
     }"
     @update:model-value="resetPalette"
   />
+
+  <div class="fixed inset-0 z-10" />
 </template>
