@@ -18,6 +18,11 @@ const presetTree: CommandPaletteItem[] = [
     ],
   },
   {
+    label: 'Code',
+    icon: 'i-lucide-code',
+    action: openCodeFromClipboard,
+  },
+  {
     label: 'Clash',
     icon: 'i-lucide-shield',
     children: [
